@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarih Vakfı Modernizasyon Projesi - Elma Elma Teklif Karşılaştırma Matrisi</title>
+    
+    <!-- Tailwind CSS ve Chart.js Yüklemesi -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS Animasyonları ve Sınıfları -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        .perspective {
+            perspective: 1000px;
+        }
+        .preserve-3d {
+            transform-style: preserve-3d;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 340px;
+        }
+        .gradient-border-custom {
+            border-image: linear-gradient(to right, #D97706, #1E3A8A) 1;
+        }
+    </style>
+</head>
+<body class="flex flex-col lg:flex-row h-screen overflow-hidden text-slate-800">
+
+    <!-- -->
+    <!-- NAVIGATION SIDEBAR -->
+    <nav class="w-full lg:w-72 bg-slate-900 text-slate-100 flex flex-col justify-between shrink-0 h-auto lg:h-full z-10 shadow-xl border-r border-slate-800">
+        <div>
+            <!-- Vakıf Logo / Başlık -->
+            <div class="p-6 bg-slate-950 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl">&#x1F3DB;&#xFE0F;</span>
+                    <div>
+                        <h1 class="text-lg font-extrabold tracking-tight text-white">Tarih Vakfı</h1>
+                        <p class="text-[10px] text-amber-500 font-semibold uppercase tracking-widest">Stratejik Karşılaştırma</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menü Linkleri -->
+            <div class="flex lg:flex-col overflow-x-auto lg:overflow-x-hidden p-2 lg:p-4 gap-1">
+                <button onclick="switchTab('ozet')" id="btn-ozet" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium transition-all duration-200 bg-slate-800 text-white border-l-4 border-amber-500">
+                    <span class="text-lg">&#x1F4CB;</span> Stratejik Özet
+                </button>
+                <button onclick="switchTab('matris')" id="btn-matris" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium transition-all duration-200 text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <span class="text-lg">&#x1F34E;</span> Elma Elma Kıyaslama
+                </button>
+                <button onclick="switchTab('fiyat')" id="btn-fiyat" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium transition-all duration-200 text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <span class="text-lg">&#x1F4B0;</span> İnteraktif Fiyat Matrisi
+                </button>
+                <button onclick="switchTab('tco')" id="btn-tco" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium transition-all duration-200 text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <span class="text-lg">&#x1F4C8;</span> 3 Yıllık Toplam Maliyet (TCO)
+                </button>
+                <button onclick="switchTab('infografik')" id="btn-infografik" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left text-sm font-medium transition-all duration-200 text-slate-400 hover:bg-slate-800 hover:text-white">
+                    <span class="text-lg">&#x1F517;</span> Mimari İnfografik
+                </button>
+            </div>
+        </div>
+
+        <!-- Alt Bilgi Paneli -->
+        <div class="hidden lg:block p-4 bg-slate-950 border-t border-slate-800 text-xs text-slate-400">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="font-semibold text-slate-300">Toplantı Hazırlık Modu</span>
+            </div>
+            <p class="text-[10px] text-slate-500">Referans Dosya: Teklif - Toplumsal Tarih Dergisi.pdf</p>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-10 scroll-smooth">
+
+        <!-- -->
+        <!-- SECTION: STRATEJİK ÖZET -->
+        <section id="sec-ozet" class="tab-content block animate-fade-in max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                    <span class="text-xs font-bold text-amber-600 bg-amber-100 px-3 py-1 rounded-full uppercase tracking-wider">Toplantı Taktik Kılavuzu</span>
+                    <h2 class="text-3xl font-extrabold text-slate-950 mt-2">Müşteriyi Ucuz WordPress Kapanından Kurtarma Stratejisi</h2>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg text-xs max-w-sm">
+                    <strong>Taktik Hedef:</strong> Müşteriyi ilk kurulum fiyatından (400k vs 800k) uzaklaştırıp, uzun vadeli güvenlik, itibar ve işletme maliyetlerine odaklamak.
+                </div>
+            </div>
+
+            <!-- Stratejik Argüman Kartları -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-200">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-2xl mb-4">&#x1F6E1;&#xFE0F;</div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Güvenlik ve Hak Ediş Açığı</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Rakip teklifteki WordPress altyapısı, 8.000'den fazla akademik makalenin ve ödeme sistemlerinin güvenliğini tehlikeye atar. WP eklentilerindeki zero-day açıkları vakfın itibarını sarsabilir.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-200">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-2xl mb-4">&#x26A1;</div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Performans ve SEO Kaybı</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Ağır WooCommerce ve eklenti paketleri Google Core Web Vitals skorlarını düşürür. Next.js ile ön-bellekleme yapılarak hazırlanan kurumsal sitemiz ise Google'da anında taranır ve ışık hızında açılır.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80 hover:shadow-md transition-all duration-200">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl mb-4">&#x1F4D6;</div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">Gizli Eklenti Lisansları</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Rakip "açık kaynak kod sayesinde lisans ücreti ödenmez" dese de, profesyonel üyelik (Paywall), gelişmiş arama ve otomatik mailing için yıllık binlerce dolarlık gizli eklenti lisans ücreti çıkarırlar.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Quick Summary Quote Box -->
+            <div class="bg-slate-900 text-white p-8 rounded-2xl relative overflow-hidden shadow-lg">
+                <div class="absolute right-0 bottom-0 opacity-10 text-9xl font-extrabold select-none pointer-events-none">&#x1F4AC;</div>
+                <h4 class="text-amber-500 font-bold uppercase tracking-wider text-xs mb-2">En Önemli İkna Argümanı</h4>
+                <p class="text-lg md:text-xl font-medium leading-relaxed max-w-4xl">
+                    "Sayın Yetkili, rakip firmanın sunduğu WordPress tabanlı sistem, ilk bakışta düşük maliyetli görünse de; 8.000 akademik makalelik devasa arşivin getireceği sunucu yükü, sürekli güncellenmesi gereken güvenlik yamaları ve eklenti çökme riskleri nedeniyle 3 yıl içinde vakfınıza çok daha ağır bir operasyonel ve maddi yük getirecektir."
+                </p>
+            </div>
+        </section>
+
+        <!-- -->
+        <!-- SECTION: ELMA ELMA KARŞILAŞTIRMA MATRİSİ -->
+        <section id="sec-matris" class="tab-content hidden animate-fade-in max-w-6xl mx-auto">
+            <div class="mb-8">
+                <span class="text-xs font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full uppercase tracking-wider">Teknik ve Operasyonel Farklar</span>
+                <h2 class="text-3xl font-extrabold text-slate-950 mt-2">"Elma Elma" (Apples-to-Apples) Teknik Kıyaslama</h2>
+                <p class="text-slate-600 text-sm mt-1">Rakip firmanın teklifinde yer alan vaatler ile kurumsal mühendislik çözümümüzün farkı.</p>
+            </div>
+
+            <!-- Matris Tablosu -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900 text-white text-xs uppercase tracking-wider">
+                                <th class="p-4 w-1/4">Teknik Özellik / Katman</th>
+                                <th class="p-4 w-3/8 bg-red-950/40 text-red-100 border-r border-slate-800">Rakip Teklif (SKA - WordPress)</th>
+                                <th class="p-4 w-3/8 bg-emerald-950/40 text-emerald-100">Önerilen Kurumsal Mimari (Next.js & NestJS)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-sm">
+                            
+                            <!-- Satır 1 -->
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">
+                                    Altyapı & Çekirdek (CMS)
+                                    <span class="block text-xs font-normal text-slate-500 mt-1">Sistem mimarisi, ölçeklenebilirlik.</span>
+                                </td>
+                                <td class="p-4 bg-red-50/30 border-r border-slate-200">
+                                    <span class="text-red-800 font-bold flex items-center gap-1">❌ Monolitik PHP (WP)</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Tüm istekler hantal PHP motoru üzerinden SQL veritabanına gider. Şişmiş temalar ve eklentiler nedeniyle zamanla ciddi performans ve sunucu kilitlenme sorunları yaşanır.
+                                    </p>
+                                </td>
+                                <td class="p-4 bg-emerald-50/20">
+                                    <span class="text-emerald-800 font-bold flex items-center gap-1">✅ Decoupled Headless (Next.js)</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Ön yüz (Frontend) ve arka yüz (Backend) tamamen izoledir. Statik üretim (SSG/ISR) teknolojisi sayesinde sayfalar milisaniyeler içinde yüklenir; veritabanına yük binmez.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- Satır 2 -->
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">
+                                    Siber Güvenlik ve Tehdit Yönetimi
+                                    <span class="block text-xs font-normal text-slate-500 mt-1">Zafiyet koruması, sızma direnci.</span>
+                                </td>
+                                <td class="p-4 bg-red-50/30 border-r border-slate-200">
+                                    <span class="text-red-800 font-bold flex items-center gap-1">❌ Kritik Güvenlik Riski</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Saldırıların %90'ı standart giriş yolları (`/wp-admin`) ve üçüncü parti eklenti açıklarından kaynaklanır. Her an bir sıfırıncı gün (zero-day) açığı vakfın tüm veritabanını riske atabilir.
+                                    </p>
+                                </td>
+                                <td class="p-4 bg-emerald-50/20">
+                                    <span class="text-emerald-800 font-bold flex items-center gap-1">✅ Üst Düzey Zırhlı Koruma</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        API katmanı dış dünyaya tamamen görünmezdir. Oturumlar HttpOnly, Secure cookie'ler içindeki JWT token'larıyla korunur. XSS ve SQL Injection açıkları mimari seviyede engellenmiştir.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- Satır 3 -->
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">
+                                    Akıllı Arama Altyapısı (Live Search)
+                                    <span class="block text-xs font-normal text-slate-500 mt-1">8.000+ makale içinde hızlı tarama.</span>
+                                </td>
+                                <td class="p-4 bg-red-50/30 border-r border-slate-200">
+                                    <span class="text-red-800 font-bold flex items-center gap-1">❌ Yavaş Standart SQL Sorgusu</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Geleneksel WordPress SQL veritabanı araması kullanır. Arşiv büyüdükçe ve eş zamanlı arama istekleri arttıkça sunucuyu aşırı yorarak sitenin çökmesine sebep olur.
+                                    </p>
+                                </td>
+                                <td class="p-4 bg-emerald-50/20">
+                                    <span class="text-emerald-800 font-bold flex items-center gap-1">✅ Elasticsearch / PostgreSQL Indexing</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Büyük hacimli veriler için özel indeksleme algoritmaları kullanılır. Kullanıcı yazmaya başladığı an milisaniyeler içinde yazar, konu veya içeriğe göre akıllı ve hatasız sonuçlar döner.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- Satır 4 -->
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">
+                                    Akademik SEO & Google Scholar
+                                    <span class="block text-xs font-normal text-slate-500 mt-1">E-E-A-T uyumu, kaynak gösterme.</span>
+                                </td>
+                                <td class="p-4 bg-red-50/30 border-r border-slate-200">
+                                    <span class="text-red-800 font-bold flex items-center gap-1">❌ Eklenti Bağımlı SEO</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Yoast veya RankMath gibi üçüncü parti eklentilere bağımlıdır. Google Akademik botlarının gereksinim duyduğu özel meta etiket formatları genellikle eksik veya hatalı üretilir.
+                                    </p>
+                                </td>
+                                <td class="p-4 bg-emerald-50/20">
+                                    <span class="text-emerald-800 font-bold flex items-center gap-1">✅ Yerleşik Schema.org & Scholar Meta</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Google Scholar bota özel akademik şemalar (ORCID, Author, University vb.) doğrudan kod seviyesinde üretilir. Google Akademik indeksleme süreci kusursuz ve tam otomatiktir.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- Satır 5 -->
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-900">
+                                    İnteraktif Dipnot & Atıf Yönetimi
+                                    <span class="block text-xs font-normal text-slate-500 mt-1">Pop-over okuma deneyimi.</span>
+                                </td>
+                                <td class="p-4 bg-red-50/30 border-r border-slate-200">
+                                    <span class="text-red-800 font-bold flex items-center gap-1">❌ Kırılgan WP Blok Sistemi</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Rakip, "özel widget" kuracağını belirtiyor. Ancak, WordPress Gutenberg güncellemelerinde veya eklenti çakışmalarında bu mizanpajlar bozularak tüm arşiv biçimlendirmesini kaybettirir.
+                                    </p>
+                                </td>
+                                <td class="p-4 bg-emerald-50/20">
+                                    <span class="text-emerald-800 font-bold flex items-center gap-1">✅ Native Payload Rich-Text Blocks</span>
+                                    <p class="text-xs text-slate-600 mt-1">
+                                        Dipnotlar ve kaynakçalar, içerik yönetim paneline özel JSON veri yapısıyla entegre edilmiştir. Tasarımsal güncellemelerden asla etkilenmez ve ömür boyu kararlı çalışır.
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- -->
+        <!-- SECTION: İNTERAKTİF FİYAT MATRİSİ -->
+        <section id="sec-fiyat" class="tab-content hidden animate-fade-in max-w-6xl mx-auto">
+            <div class="mb-8">
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full uppercase tracking-wider">Maliyet Kıyaslaması</span>
+                <h2 class="text-3xl font-extrabold text-slate-950 mt-2">Kurulum ve Gizli Maliyet Analizi</h2>
+                <p class="text-slate-600 text-sm mt-1">Rakip teklifin ilk bakışta "ucuz" görünen fiyatının altındaki ek operasyonel maliyetleri inceleyin.</p>
+            </div>
+
+            <!-- Fiyat Kartları -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <!-- Rakip Teklif Kartı -->
+                <div class="bg-white rounded-2xl shadow-sm border-t-4 border-red-500 border-x border-b border-slate-200 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-bold text-red-600 uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full">Rakip Teklif (WordPress)</span>
+                            <span class="text-xs text-slate-500">SKA - néopublico</span>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-6">Açık kaynaklı şablonlar üzerine eklentilerle inşa edilen kısıtlı altyapı.</p>
+                        
+                        <div class="space-y-4 border-t border-slate-100 pt-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-600 text-sm">İlk Kurulum Bedeli</span>
+                                <span class="font-extrabold text-slate-900 text-xl">400.000 TL + KDV</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-600 text-sm">Aylık Bakım / Destek</span>
+                                <span class="font-bold text-slate-900 text-md">25.000 TL + KDV</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-600 text-sm">3 Yıllık Standart Toplamı</span>
+                                <span class="font-bold text-red-600 text-md">1.300.000 TL + KDV</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 p-4 bg-red-50/50 rounded-xl border border-red-100">
+                            <h4 class="font-bold text-red-900 text-xs mb-2">&#x26A0;&#xFE0F; WordPress Gizli Maliyet Riskleri:</h4>
+                            <ul class="text-[11px] text-red-800 space-y-1 list-disc list-inside">
+                                <li>Yıllık Lisans Bedelleri (Premium Paywall, Forms vb.): ~15.000 TL/Yıl</li>
+                                <li>Olası Hack/Saldırı Sonrası Kurtarma Giderleri: ~35.000 TL/Vaka</li>
+                                <li>Yavaş LCP ve Mobil Hız Sebebiyle SEO/Organik Trafik Kaybı: Ölçülemez prestij kaybı</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bizim Önerimiz Kartı -->
+                <div class="bg-slate-900 rounded-2xl shadow-xl border-t-4 border-emerald-500 p-6 text-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm font-bold text-emerald-400 uppercase tracking-widest bg-emerald-950/80 px-3 py-1 rounded-full">Bizim Önerimiz (Kurumsal)</span>
+                            <span class="text-xs text-amber-500 font-bold">Önerilen Tercih</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-6">Mühendislik temelli, sıfır lisans bağımlılığı, ömür boyu güvenli mimari.</p>
+                        
+                        <div class="space-y-4 border-t border-slate-800 pt-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-sm">İlk Kurulum Bedeli</span>
+                                <span class="font-extrabold text-white text-xl">800.000 TL + KDV</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-sm">Aylık Bakım / Destek</span>
+                                <span class="font-bold text-white text-md">15.000 TL + KDV</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-slate-300 text-sm">3 Yıllık Standart Toplamı</span>
+                                <span class="font-bold text-emerald-400 text-md">1.340.000 TL + KDV</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-emerald-950/40 rounded-xl border border-emerald-900/60 text-slate-200">
+                            <h4 class="font-bold text-emerald-400 text-xs mb-2">&#x2705; Kurumsal Mimari Tasarrufları:</h4>
+                            <ul class="text-[11px] text-emerald-300 space-y-1 list-disc list-inside">
+                                <li>Sıfır Eklenti Lisansı Bağımlılığı (Yıllık 0 TL)</li>
+                                <li>Güvenlik Duvarı ile Sıfır Hack Riski (0 TL Kurtarma Maliyeti)</li>
+                                <li>Next.js Sayesinde En Üst Düzey Google SEO Sıralama Avantajı</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- -->
+        <!-- SECTION: 3 YILLIK TOPLAM MALİYET (TCO) SIMULATOR -->
+        <section id="sec-tco" class="tab-content hidden animate-fade-in max-w-6xl mx-auto">
+            <div class="mb-8">
+                <span class="text-xs font-bold text-amber-600 bg-amber-100 px-3 py-1 rounded-full uppercase tracking-wider">İnteraktif Maliyet Analiz Aracı</span>
+                <h2 class="text-3xl font-extrabold text-slate-950 mt-2">3 Yıllık Toplam Sahip Olma Maliyeti (TCO)</h2>
+                <p class="text-slate-600 text-sm mt-1">Müşteriye siber saldırı riskleri ve lisans bedelleri dahil edildiğinde, WordPress'in neden çok daha pahalı olduğunu canlı olarak simüle edin.</p>
+            </div>
+
+            <!-- Simulator Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Sliders Control Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg mb-4">Risk & Maliyet Parametreleri</h3>
+                        <p class="text-xs text-slate-500 mb-6">Aşağıdaki parametreleri müşterinizin önünde değiştirerek sonuçları anında gösterin.</p>
+                        
+                        <!-- Slider 1 -->
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs font-bold mb-2">
+                                <span class="text-slate-700">Yıllık Siber Saldırı Sıklığı</span>
+                                <span id="hackCountText" class="text-red-600 font-extrabold">1 Vaka</span>
+                            </div>
+                            <input type="range" id="hackSlider" min="0" max="4" value="1" step="1" oninput="updateTcoSimulator()" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500">
+                            <div class="flex justify-between text-[9px] text-slate-400 mt-1 font-semibold">
+                                <span>Risk Yok (Bizim Mimari)</span>
+                                <span>Yoğun Tehdit (WP Ortalaması)</span>
+                            </div>
+                        </div>
+
+                        <!-- Slider 2 -->
+                        <div class="mb-6">
+                            <div class="flex justify-between text-xs font-bold mb-2">
+                                <span class="text-slate-700">Yıllık Eklenti Güncelleme Lisansları</span>
+                                <span id="pluginLicenseText" class="text-amber-600 font-extrabold">15.000 TL</span>
+                            </div>
+                            <input type="range" id="licenseSlider" min="5000" max="45000" value="15000" step="5000" oninput="updateTcoSimulator()" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500">
+                            <div class="flex justify-between text-[9px] text-slate-400 mt-1 font-semibold">
+                                <span>Temel Lisanslar</span>
+                                <span>Gelişmiş Kurumsal Paketler</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Summary Panel inside Sliders -->
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                        <div class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Başabaş (Break-Even) Noktası</div>
+                        <div id="breakevenText" class="text-md font-extrabold text-blue-900">14. Ayda Başabaş Noktası</div>
+                        <p class="text-[10px] text-slate-400 mt-1">Bu aydan sonra kurumsal mimarimiz her ay tasarruf sağlar.</p>
+                    </div>
+                </div>
+
+                <!-- Cumulative Cost Chart Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 lg:col-span-2">
+                    <h3 class="font-bold text-slate-900 text-lg mb-4">Kümülatif Maliyet Trendi (36 Ay)</h3>
+                    <div class="chart-container">
+                        <canvas id="tcoChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- -->
+        <!-- SECTION: MİMARİ İNFOGRAFİK -->
+        <section id="sec-infografik" class="tab-content hidden animate-fade-in max-w-6xl mx-auto">
+            <div class="mb-8">
+                <span class="text-xs font-bold text-amber-600 bg-amber-100 px-3 py-1 rounded-full uppercase tracking-wider">Teknolojik Katman Şeması</span>
+                <h2 class="text-3xl font-extrabold text-slate-950 mt-2">Monolitik vs Headless Karşılaştırmalı İnfografik</h2>
+                <p class="text-slate-600 text-sm mt-1">Neden Next.js ve NestJS bağımsız yapısının e-ticaret ve kütüphane için en iyi tercih olduğunu görselleştirin.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Rakip WordPress Mimarisi (Monolitik) -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="inline-block w-3 h-3 rounded-full bg-red-500"></span>
+                            <h3 class="font-extrabold text-slate-900">Monolitik Mimari (WordPress)</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 mb-6">Tüm katmanların birbiriyle sıkı sıkıya bağlı (tightly coupled) olduğu, birindeki zafiyetin tüm sistemi çökerttiği kırılgan yapı.</p>
+                        
+                        <!-- Visual representation of Monolithic stack -->
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 rounded-lg border border-red-200/60 text-center text-red-900 text-xs font-bold">
+                                🖥️ Ön Yüz, Tema ve Eklentiler (Monolitik WP)
+                            </div>
+                            <div class="text-center text-slate-400 text-xs">&#x21F5; (Sıkı Bağlantılı, Güvenlik Zafiyeti Yüksek)</div>
+                            <div class="p-3 bg-red-100 rounded-lg border border-red-200 text-center text-red-900 text-xs font-bold">
+                                ⚙️ PHP Motoru & Yönetim Paneli
+                            </div>
+                            <div class="text-center text-slate-400 text-xs">&#x21F5; (Sorgu Yığılmaları ve Kilitlenme Riski)</div>
+                            <div class="p-3 bg-red-500 text-white rounded-lg text-center text-xs font-bold">
+                                💾 Standart MySQL Veritabanı
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-xs text-red-800 bg-red-50/50 p-3 rounded-lg border border-red-100">
+                        * Bir eklenti çöktüğünde veya güncellendiğinde tüm web sitesi erişilemez hale gelir. Sunucu yükü yüksektir.
+                    </div>
+                </div>
+
+                <!-- Bizim Önerimiz (Decoupled Headless) -->
+                <div class="bg-slate-900 p-6 rounded-2xl shadow-xl text-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="inline-block w-3 h-3 rounded-full bg-emerald-500"></span>
+                            <h3 class="font-extrabold text-white">Bağımsız (Decoupled Headless) Mimari</h3>
+                        </div>
+                        <p class="text-xs text-slate-300 mb-6">Frontend ve Backend katmanlarının birbirinden tamamen bağımsız çalıştığı, sızması imkansız ve son derece hızlı modern kurumsal yapı.</p>
+                        
+                        <!-- Visual representation of Headless stack -->
+                        <div class="space-y-3">
+                            <div class="p-3 bg-emerald-950/80 rounded-lg border border-emerald-900/60 text-center text-emerald-300 text-xs font-bold">
+                                🖥️ Next.js Frontend (Blazing Fast Sayfalar - SEO Uyumlu)
+                            </div>
+                            <div class="text-center text-emerald-600/60 text-xs">&#x21F5; (Güvenli JWT & API Katmanı - İzole İletişim)</div>
+                            <div class="p-3 bg-slate-800 rounded-lg border border-slate-700 text-center text-slate-300 text-xs font-bold">
+                                ⚙️ NestJS Backend & Payload CMS (Yüksek Güvenlik)
+                            </div>
+                            <div class="text-center text-emerald-600/60 text-xs">&#x21F5; (İlişkisel ve Optimize İndeksleme)</div>
+                            <div class="p-3 bg-emerald-600 text-white rounded-lg text-center text-xs font-bold">
+                                💾 PostgreSQL Veritabanı (Maksimum Kararlılık)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-xs text-emerald-400 bg-emerald-950/50 p-3 rounded-lg border border-emerald-900/40">
+                        * Frontend çökse bile Backend çalışmaya devam eder. Saldırganlar doğrudan veritabanına asla ulaşamaz.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- -->
+    <script>
+        // Tab / Bölüm Geçiş Mantığı
+        function switchTab(tabId) {
+            // Aktif buton stylingini ayarla
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-white', 'border-l-4', 'border-amber-500');
+                btn.classList.add('text-slate-400');
+            });
+            const activeBtn = document.getElementById('btn-' + tabId);
+            activeBtn.classList.remove('text-slate-400');
+            activeBtn.classList.add('bg-slate-800', 'text-white', 'border-l-4', 'border-amber-500');
+
+            // Tüm bölümleri gizle, seçileni göster
+            document.querySelectorAll('.tab-content').forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('block');
+            });
+            const activeSection = document.getElementById('sec-' + tabId);
+            activeSection.classList.remove('hidden');
+            activeSection.classList.add('block');
+
+            // İlgili grafikleri tembel yükleme (lazy initialization) ile çalıştır
+            if (tabId === 'tco' && !currentState.chartsInitialized.tco) {
+                setTimeout(() => {
+                    initTcoChart();
+                    updateTcoSimulator();
+                }, 50);
+                currentState.chartsInitialized.tco = true;
+            }
+            if (tabId === 'matris' && !currentState.chartsInitialized.architecture) {
+                // Matris sekmesinde gerekirse ek radar grafik vb. de render edilebilir.
+                currentState.chartsInitialized.architecture = true;
+            }
+        }
+
+        // TCO Simülatörü Hesaplama Fonksiyonu
+        function updateTcoSimulator() {
+            const hackCount = parseInt(document.getElementById('hackSlider').value);
+            const licenseCost = parseInt(document.getElementById('licenseSlider').value);
+
+            // UI Slider metinlerini dinamik güncelle
+            document.getElementById('hackCountText').innerText = hackCount === 0 ? "0 Risk (Sıfır Tehdit)" : hackCount + " Vaka / Yıl";
+            document.getElementById('pluginLicenseText').innerText = licenseCost.toLocaleString('tr-TR') + " TL";
+
+            // WP Kümülatif Maliyet Analizi (36 Ay)
+            // Kurulum: 400.000 TL, Destek: 25.000 TL/ay.
+            // Gizli Lisanslar: yıllık lisans maliyeti.
+            // Siber Saldırı Kurtarma: vaka başına 35.000 TL ek operasyonel kayıp.
+            const siberGider = hackCount * 35000; // Yıllık siber saldırı faturası
+            
+            // Bizim Mimari (Custom) Kümülatif Maliyet Analizi (36 Ay)
+            // Kurulum: 800.000 TL, Destek: 15.000 TL/ay.
+            // Sıfır lisans bağımlılığı ve sıfır siber saldırı gideri.
+
+            const year0WP = currentState.wpSetup;
+            const year1WP = year0WP + (currentState.wpMonthly * 12) + licenseCost + siberGider;
+            const year2WP = year1WP + (currentState.wpMonthly * 12) + licenseCost + siberGider;
+            const year3WP = year2WP + (currentState.wpMonthly * 12) + licenseCost + siberGider;
+
+            const year0Custom = currentState.customSetup;
+            const year1Custom = year0Custom + (currentState.customMonthly * 12);
+            const year2Custom = year1Custom + (currentState.customMonthly * 12);
+            const year3Custom = year2Custom + (currentState.customMonthly * 12);
+
+            // UI üzerindeki Toplam Maliyetleri Güncelle
+            document.getElementById('wpRealCostText').innerText = year3WP.toLocaleString('tr-TR') + " TL";
+            document.getElementById('customCostText').innerText = year3Custom.toLocaleString('tr-TR') + " TL";
+
+            // Başabaş Noktası (Break-Even Month) Hesaplama
+            // 400.000 + Month * (25.000 + (License/12) + (Cyber/12)) = 800.000 + Month * 15.000
+            const wpMonthlyAverage = currentState.wpMonthly + (licenseCost / 12) + (siberGider / 12);
+            const monthlySaving = wpMonthlyAverage - currentState.customMonthly;
+            const setupDifference = currentState.customSetup - currentState.wpSetup;
+            
+            let breakEvenText = "";
+            if (monthlySaving <= 0) {
+                breakEvenText = "WordPress Her Zaman Daha Ucuz Kalıyor";
+            } else {
+                const breakEvenMonth = Math.ceil(setupDifference / monthlySaving);
+                breakEvenText = breakEvenMonth + ". Ayda Başabaş Noktası";
+            }
+            document.getElementById('breakevenText').innerText = breakEvenText;
+
+            // Grafik Verilerini Güncelle
+            if (currentState.tcoChartInstance) {
+                // Grafik üzerindeki aylık trend noktalarını hesapla
+                const labels = ['Başlangıç'];
+                const wpData = [year0WP];
+                const customData = [year0Custom];
+
+                for (let m = 1; m <= 36; m++) {
+                    if (m % 6 === 0 || m === 12 || m === 24 || m === 36) {
+                        labels.push(m + '. Ay');
+                        
+                        // WP Monthly cumulative
+                        const wpComp = currentState.wpSetup + (currentState.wpMonthly * m) + ((licenseCost / 12) * m) + ((siberGider / 12) * m);
+                        wpData.push(wpComp);
+
+                        // Custom Monthly cumulative
+                        const customComp = currentState.customSetup + (currentState.customMonthly * m);
+                        customData.push(customComp);
+                    }
+                }
+
+                currentState.tcoChartInstance.data.labels = labels;
+                currentState.tcoChartInstance.data.datasets[0].data = wpData;
+                currentState.tcoChartInstance.data.datasets[1].data = customData;
+                currentState.tcoChartInstance.update();
+            }
+        }
+
+        // TCO Grafik Başlatma (Chart.js)
+        function initTcoChart() {
+            const ctx = document.getElementById('tcoChart').getContext('2d');
+            currentState.tcoChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Başlangıç', '12. Ay', '24. Ay', '36. Ay'],
+                    datasets: [{
+                        label: 'WordPress (Rakip SKA)',
+                        data: [400000, 715000, 1080000, 1445000],
+                        borderColor: '#EF4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.05)',
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        tension: 0.1,
+                        fill: true
+                    }, {
+                        label: 'Kurumsal Özel Mimari (Biz)',
+                        data: [800000, 980000, 1160000, 1340000],
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return (value / 1000).toLocaleString('tr-TR') + 'k TL';
+                                }
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: 'Inter',
+                                    size: 11
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.raw.toLocaleString('tr-TR') + ' TL';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
