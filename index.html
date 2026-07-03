@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Araç Takip Sistemi - İnteraktif Proje Raporu</title>
+    <!-- Tailwind CSS for high-end styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Executive Trust (Slate, White, Minimalist Blue Accent, Status Red/Green) -->
+    <style>
+        body { background-color: #f8fafc; color: #1e293b; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        .nav-active { background-color: #eff6ff; color: #2563eb; border-right: 4px solid #2563eb; font-weight: 600; }
+        .arch-step:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .arch-step.active { border-color: #3b82f6; background-color: #f0fdf4; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 40vh;
+            max-height: 400px;
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(239, 68, 68, 0.4); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { border-color: rgba(239, 68, 68, 1); box-shadow: 0 0 12px 4px rgba(239, 68, 68, 0.2); }
+        }
+        .critical-warning {
+            animation: pulse-border 2s infinite;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 350px; }
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased">
+
+    <!-- Toast Notification Overlay for simulated actions -->
+    <div id="custom-toast" class="fixed bottom-5 right-5 bg-slate-950 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 font-medium border border-slate-800 text-sm"></div>
+
+    <nav class="w-64 bg-white border-r border-slate-200 flex flex-col shadow-sm z-10 flex-shrink-0">
+        <div class="p-6 border-b border-slate-100">
+            <h1 class="text-xl font-bold text-slate-800 tracking-tight">CieloSync & Atölye</h1>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-wider font-semibold">Proje Analiz Raporu</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <button onclick="navigate('ozet')" id="nav-ozet" class="w-full text-left px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors nav-active">
+                <span class="mr-2">📄</span> Proje Özeti
+            </button>
+            <button onclick="navigate('arayuz')" id="nav-arayuz" class="w-full text-left px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="mr-2">📱</span> Uygulama Arayüzleri
+            </button>
+            <button onclick="navigate('mimari')" id="nav-mimari" class="w-full text-left px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="mr-2">🔄</span> Sistem Mimarisi
+            </button>
+            <button onclick="navigate('analiz')" id="nav-analiz" class="w-full text-left px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="mr-2">📊</span> Efor ve Veri Analizi
+            </button>
+            <button onclick="navigate('riskler')" id="nav-riskler" class="w-full text-left px-6 py-3 text-sm text-slate-600 hover:bg-slate-50 transition-colors">
+                <span class="mr-2">🛑</span> Risk ve Darboğazlar
+            </button>
+        </div>
+        <div class="p-4 border-t border-slate-100 bg-slate-50 text-xs text-slate-400 text-center">
+            MVP Sürüm Raporu v1.1
+        </div>
+    </nav>
+
+    <main class="flex-1 overflow-y-auto bg-slate-50 p-8 scroll-smooth">
+        <div class="max-w-5xl mx-auto space-y-8">
+
+            <section id="sec-ozet" class="block animate-fade-in">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Proje Gerçekleri & Beklenti Yönetimi</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8 text-lg">
+                        Bu bölüm, VIP transfer operasyonlarında kullanılacak olan minimum uygulanabilir ürün (MVP) kapsamındaki mobil filo takip sisteminin temel amaçlarını ve kullanılacak teknoloji yığınını sunar. Amacımız, dağınık lokasyonlardaki sürücülerin verilerini tek bir merkezde güvenle toplamaktır.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-xl">
+                            <h3 class="text-red-700 font-bold mb-2 text-lg">Yaygın Yanılgı</h3>
+                            <p class="text-red-900/80">"Sadece bir harita ve 3 buton var, uygulama 3 günde biter."</p>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl">
+                            <h3 class="text-blue-700 font-bold mb-2 text-lg">Teknik Gerçek</h3>
+                            <p class="text-blue-900/80">Kodun yazılması işin ufak bir kısmıdır. Mobil ekosistemde kararlılık, işletim sistemlerinin arka plan güvenlik duvarları ve pil optimizasyon testleri asıl zamanı alır.</p>
+                        </div>
+                    </div>
+
+                    <!-- Market Distribution Critical Callout Panel -->
+                    <div class="critical-warning bg-amber-50 border-2 border-red-500 p-6 rounded-xl mb-8">
+                        <div class="flex items-start gap-4">
+                            <div class="text-3xl">⚠️</div>
+                            <div>
+                                <h4 class="text-red-800 font-bold text-lg mb-1">Kritik Süreç Uyarıcı: Mağaza Dağıtımı & Onay Döngüsü</h4>
+                                <p class="text-slate-700 text-sm leading-relaxed mb-3">
+                                    Mobil uygulamayı yazmak işin sadece birinci adımıdır. Uygulamanın <strong>App Store ve Google Play Store'da</strong> yayına girmesi, Apple ve Google'ın manuel inceleme süreçlerine tabidir. Bu süreç tek başına günlerce sürebilir ve kapalı devre kurumsal takip yazılımları için mağaza reddi (App Store Rejection) riski barındırır.
+                                </p>
+                                <span class="inline-block bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full font-semibold">Bizim Çözümümüz: Android APK + iOS TestFlight ile Mağaza Süreçlerini Tamamen Bypass Etmek</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-slate-800 mb-4">Seçilen Teknoloji Yığını (Sıfır Sunucu Maliyeti)</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <div class="text-2xl mb-2">⚛️</div>
+                            <div class="font-semibold text-slate-700">React Native</div>
+                            <div class="text-xs text-slate-500 mt-1">Cross-Platform App</div>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <div class="text-2xl mb-2">🔥</div>
+                            <div class="font-semibold text-slate-700">Firebase</div>
+                            <div class="text-xs text-slate-500 mt-1">Real-time DB & Auth</div>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <div class="text-2xl mb-2">🗺️</div>
+                            <div class="font-semibold text-slate-700">Google Maps</div>
+                            <div class="text-xs text-slate-500 mt-1">Harita & Geolocation</div>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <div class="text-2xl mb-2">🚀</div>
+                            <div class="font-semibold text-slate-700">Expo / TestFlight</div>
+                            <div class="text-xs text-slate-500 mt-1">Hızlı Dağıtım</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-arayuz" class="hidden animate-fade-in">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-2">Uygulama Arayüz Tasarımları & Canlı Demo</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6 text-sm">
+                        Aşağıdaki canlı simülatör üzerinden, sürücü uygulamasındaki durum güncellemelerinin yönetici canlı takip haritasına nasıl anlık olarak yansıdığını doğrudan deneyimleyebilirsiniz.
+                    </p>
+
+                    <!-- Beautiful fully functional simulation of the Real-time Sync -->
+                    <div id="mockup-interactive-area" class="block">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Left: Simulated Driver Device -->
+                            <div class="bg-slate-900 text-white p-6 rounded-[3rem] border-[12px] border-slate-800 shadow-2xl relative aspect-[9/16] max-w-[340px] mx-auto w-full">
+                                <div class="absolute top-2 left-1/2 transform -translate-x-1/2 w-32 h-4 bg-slate-800 rounded-full"></div>
+                                <div class="mt-4 flex justify-between items-center px-2 text-xs text-slate-400">
+                                    <span>09:41</span>
+                                    <span>Sürücü Paneli</span>
+                                </div>
+                                <div class="h-full flex flex-col justify-between py-6">
+                                    <div class="text-center mt-4">
+                                        <div class="w-16 h-16 bg-slate-700 rounded-full mx-auto flex items-center justify-center text-3xl mb-2">👤</div>
+                                        <h3 class="font-bold text-lg">Sürücü Ümit</h3>
+                                        <p class="text-xs text-slate-400">Mercedes Vito (34 NZ 8000)</p>
+                                    </div>
+
+                                    <div class="space-y-3 px-2">
+                                        <button onclick="setSimulatedStatus('green')" id="sim-btn-green" class="w-full py-4 rounded-xl bg-green-600 text-white font-bold hover:bg-green-700 transition-all flex justify-between px-6 items-center shadow-lg border-2 border-white">
+                                            <span>🟢 UYGUN / BOŞTA</span>
+                                            <span class="text-xs bg-green-800 px-2 py-0.5 rounded">Seçili</span>
+                                        </button>
+                                        <button onclick="setSimulatedStatus('red')" id="sim-btn-red" class="w-full py-4 rounded-xl bg-red-600 text-white font-bold opacity-60 hover:bg-red-700 transition-all flex justify-between px-6 items-center">
+                                            <span>🔴 DOLU / MEŞGUL</span>
+                                            <span class="text-xs hidden bg-red-800 px-2 py-0.5 rounded">Seçili</span>
+                                        </button>
+                                        <button onclick="setSimulatedStatus('grey')" id="sim-btn-grey" class="w-full py-4 rounded-xl bg-slate-600 text-white font-bold opacity-60 hover:bg-slate-700 transition-all flex justify-between px-6 items-center">
+                                            <span>⚪ MESAI DIŞI</span>
+                                            <span class="text-xs hidden bg-slate-800 px-2 py-0.5 rounded">Seçili</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="text-center text-[10px] text-slate-500">
+                                        Arka plan konum verisi Firebase Real-time DB üzerine anlık yazılıyor.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Simulated Admin Map View -->
+                            <div class="bg-slate-100 p-4 rounded-2xl border border-slate-200 flex flex-col justify-between">
+                                <div class="bg-white p-3 rounded-xl shadow-sm mb-3 flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-bold text-slate-800 text-sm">Yönetici Canlı Harita Paneli</h4>
+                                        <p class="text-xs text-slate-500">Firestore Real-time entegrasyonu simülasyonu</p>
+                                    </div>
+                                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded font-bold animate-pulse">Bağlantı Aktif (onSnapshot)</span>
+                                </div>
+
+                                <!-- Pseudo Map -->
+                                <div class="bg-sky-200 rounded-xl relative h-[280px] border border-sky-300 overflow-hidden shadow-inner flex items-center justify-center">
+                                    <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                                    <!-- Sabiha Gökçen Airport Tag -->
+                                    <div class="absolute bottom-4 right-4 bg-white/90 text-[10px] p-1 rounded border shadow text-slate-700 font-bold">✈️ Sabiha Gökçen Havalimanı</div>
+                                    <!-- İstanbul Airport Tag -->
+                                    <div class="absolute top-4 left-4 bg-white/90 text-[10px] p-1 rounded border shadow text-slate-700 font-bold">✈️ İstanbul Havalimanı</div>
+
+                                    <!-- Simulated Active Pin -->
+                                    <div id="sim-marker" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all duration-500 scale-110" onclick="showSimPinDetails()">
+                                        <div class="flex flex-col items-center">
+                                            <!-- Dynamic Badge -->
+                                            <div class="bg-slate-900/90 text-white text-[9px] px-2 py-1 rounded-md shadow-md text-center font-semibold leading-tight border border-slate-700">
+                                                <div>34 NZ 8000</div>
+                                                <div class="text-slate-300 text-[8px]" id="sim-marker-speed">Hız: 0 km/s</div>
+                                            </div>
+                                            <!-- Pin pointer with dynamic color -->
+                                            <div id="sim-marker-dot" class="w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg mt-1 animate-bounce"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Selected Marker Action Panel -->
+                                <div id="sim-details-card" class="mt-3 bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                                    <div class="flex justify-between items-start mb-3">
+                                        <div>
+                                            <h5 class="font-bold text-slate-800 text-sm">Sürücü: Ümit <span id="sim-card-status" class="ml-1.5 text-[10px] px-2 py-0.5 rounded-full bg-green-100 text-green-800 font-bold">BOŞTA</span></h5>
+                                            <p class="text-xs text-slate-500 mt-0.5">Mercedes-Benz Vito • 34 NZ 8000</p>
+                                        </div>
+                                        <span class="text-xs font-semibold text-slate-700">Konum: Kadıköy</span>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button onclick="simulateCall()" class="flex-1 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition-colors flex items-center justify-center gap-1.5">
+                                            📞 Şoförü Ara
+                                        </button>
+                                        <button onclick="simulateAssignJob()" class="flex-1 py-2 bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs rounded-lg transition-colors">
+                                            📦 Hızlı İş Atama
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-mimari" class="hidden animate-fade-in">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Sistemin Basit Çalışma Mimarisi</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8 text-lg">
+                        Bu bölüm, verinin şoförün telefonundan başlayıp yöneticinin ekranına ulaşana kadar izlediği yolu gösterir. Etkileşimli adımlara tıklayarak, her bir basit özelliğin arka planındaki karmaşık mühendislik katmanını inceleyebilirsiniz.
+                    </p>
+
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div class="w-full lg:w-1/2 space-y-4 relative">
+                            <div class="absolute w-1 bg-blue-200 h-full left-6 top-0 z-0"></div>
+                            
+                            <div class="arch-step relative z-10 bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all" onclick="showTechDetail('driver')">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-xl shadow-sm">📱</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800">1. Sürücü Cebi (Uygulama)</h4>
+                                        <p class="text-sm text-slate-500">Arka planda uykudayken bile GPS koordinatı alınır. Durum (Yeşil/Kırmızı) seçilir.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="arch-step relative z-10 bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all" onclick="showTechDetail('cloud')">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-xl shadow-sm">🔥</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800">2. Bulut Veritabanı</h4>
+                                        <p class="text-sm text-slate-500">Konum verileri milisaniyeler içinde buluta yazılır ve filtrelenir.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="arch-step relative z-10 bg-white border-2 border-slate-200 rounded-xl p-4 cursor-pointer transition-all" onclick="showTechDetail('admin')">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-xl shadow-sm">🗺️</div>
+                                    <div>
+                                        <h4 class="font-bold text-slate-800">3. Yönetici Ekranı</h4>
+                                        <p class="text-sm text-slate-500">Harita yenilenmeden canlı pinler hareket eder. Tek tuşla hücresel arama yapılır.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full lg:w-1/2">
+                            <div id="tech-detail-panel" class="bg-slate-800 text-slate-100 p-6 rounded-xl h-full shadow-inner flex flex-col justify-center min-h-[300px]">
+                                <div class="text-center text-slate-400">
+                                    <span class="text-4xl block mb-4">👈</span>
+                                    Mimari detaylarını ve mühendislik katmanını görmek için soldaki adımlara tıklayın.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-analiz" class="hidden animate-fade-in">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Efor ve Veri Analizi</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8 text-lg">
+                        Bu bölüm, uygulamanın geliştirme sürecindeki zaman dağılımını ve kısa süreli (3 günlük) bir projenin yaratacağı risklerin istatistiksel karşılaştırmasını sunar. Grafiklerdeki verilere dokunarak detayları inceleyebilirsiniz.
+                    </p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="border border-slate-200 rounded-xl p-6 bg-slate-50">
+                            <h3 class="text-center font-bold text-slate-700 mb-4">Geliştirme Efor Dağılımı (%)</h3>
+                            <div class="chart-container">
+                                <canvas id="effortChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-slate-500 mt-4">Görüldüğü üzere kodlama (UI) işin sadece %20'sidir.</p>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-xl p-6 bg-slate-50">
+                            <h3 class="text-center font-bold text-slate-700 mb-4">Saha Başarısızlık Olasılığı (3 Gün vs 14 Gün)</h3>
+                            <div class="chart-container">
+                                <canvas id="riskChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-slate-500 mt-4">Test edilmemiş uygulamaların operasyonu durdurma riski.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-riskler" class="hidden animate-fade-in">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">3-4 Günlük Süreyi İmkansız Kılan Darboğazlar</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8 text-lg">
+                        Bu bölüm, yazılım kodlaması bitse bile uygulamanın neden hemen sahaya sürülemeyeceğini açıklar. Operasyonun güvenliğini sağlamak için çözülmesi gereken kritik süreçler aşağıda listelenmiştir.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Critical Highlighted Market Distribution Bottleneck -->
+                        <div class="col-span-1 md:col-span-2 bg-red-50 border-2 border-red-500 p-6 rounded-xl shadow-md relative overflow-hidden">
+                            <span class="absolute top-2 right-2 bg-red-600 text-white text-[10px] uppercase px-2 py-0.5 rounded-full font-bold animate-pulse">En Büyük Darboğaz</span>
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-red-600 text-white p-2.5 rounded-lg font-bold">1</span>
+                                <h3 class="font-extrabold text-red-800 text-lg">Mağaza (Market) Dağıtım ve Yayın Onayı Süreci</h3>
+                            </div>
+                            <p class="text-sm text-slate-700 leading-relaxed mb-3">
+                                Uygulamaların yazımı tamamlandığında dahi, <strong>App Store ve Google Play</strong> platformlarına yüklenip son kullanıcının indirebileceği kıvama gelmesi saatler değil, günler sürer.
+                            </p>
+                            <ul class="text-xs text-slate-600 space-y-2 pl-4 list-disc">
+                                <li><strong>Apple App Store İncelemesi:</strong> Apple mühendisleri uygulamayı birebir cihazlarında açıp test eder. Kapalı/Şirket içi uygulamaları reddetme eğilimleri yüksektir (Hata Payı: %45).</li>
+                                <li><strong>Google Play Console Onayı:</strong> Google'ın yeni politikası gereği yeni hesaplarda en az 20 test kullanıcısının uygulamayı 14 gün kesintisiz test etmesi zorunludur.</li>
+                                <li><strong>Bizim bypass planımız:</strong> Android için doğrudan <strong>APK</strong> dağıtımı yapmak, iOS için ise <strong>TestFlight</strong> dış testi kurarak mağaza incelemelerini tamamen atlamaktır.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Technical Bottlenecks: BG tasks -->
+                        <div class="bg-white border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-slate-200 text-slate-700 p-2 rounded-lg font-bold">2</span>
+                                <h3 class="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Arka Plan & Pil Optimizasyon Testleri</h3>
+                            </div>
+                            <p class="text-sm text-slate-600">iOS ve Android, arkada sürekli konum gönderen uygulamaları "batarya düşmanı" olarak algılar ve kapatır. Telefon kilitliyken sistemin çökmemesi için saha testi şarttır.</p>
+                        </div>
+
+                        <!-- Technical Bottlenecks: Sync -->
+                        <div class="bg-white border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-slate-200 text-slate-700 p-2 rounded-lg font-bold">3</span>
+                                <h3 class="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Canlı Veri Senkronizasyon Limitleri</h3>
+                            </div>
+                            <p class="text-sm text-slate-600">Haritada 20 aracın aynı anda hareket ettiği durumda Firebase veri akışının optimize edilmesi şarttır. Aksi halde harita kilitlenir ve internet kotası tükenir.</p>
+                        </div>
+
+                        <!-- Technical Bottlenecks: Edge Cases -->
+                        <div class="bg-white border border-slate-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-slate-200 text-slate-700 p-2 rounded-lg font-bold">4</span>
+                                <h3 class="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Uç Durum (Edge Case) Çözümleri</h3>
+                            </div>
+                            <p class="text-sm text-slate-600">Şoför tüneldeyken GPS koparsa ne olacak? İnternet gittiğinde uygulama çökecek mi? Bu detaylar kodlanmadan sahaya çıkılırsa operasyon felç olur.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-slate-800 text-white p-6 rounded-xl text-center">
+                        <p class="font-semibold text-lg mb-2">Özet Sonuç</p>
+                        <p class="text-slate-300">Amacımız hızlı ama sahada çalışan, çökmeyen ve sizi yarı yolda bırakmayan bir sistem kurmaktır. Belirlenen 10-14 günlük süre, sistemin hatasız çalışması için gereken minimum güvenli süredir.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        const appState = {
+            currentTab: 'ozet',
+            chartsInitialized: false,
+            simulatedStatus: 'green' // green, red, grey
+        };
+
+        const techDetails = {
+            driver: {
+                title: "Mühendislik Katmanı: Sürücü Uygulaması",
+                content: "<strong>Görev:</strong> 'Şoför konumunu atsın'<br><br><strong>Arka Plan:</strong> iOS ve Android'in değişen pil tasarrufu algoritmalarına karşı cihazı uyanık tutma (Background Task yönetimi). Sistem, <code>expo-location</code> kullanılarak belirli mesafe veya zaman aralıklarında işletim sistemini uyandırıp veriyi çeker.",
+                icon: "📱"
+            },
+            cloud: {
+                title: "Mühendislik Katmanı: Bulut Entegrasyonu",
+                content: "<strong>Görev:</strong> 'Hız ve Durum Hesaplaması'<br><br><strong>Arka Plan:</strong> Sunucu maliyetini sıfırlamak için Firebase Firestore Real-time DB kullanılır. GPS verisinden alınan iki nokta arasındaki zaman farkından <strong>anlık hız matematiksel olarak hesaplanır</strong>. KVKK gereği hassas veri tutulmaz.",
+                icon: "🔥"
+            },
+            admin: {
+                title: "Mühendislik Katmanı: Yönetici Haritası",
+                content: "<strong>Görev:</strong> 'Haritada aracı göreyim...' <br><br><strong>Arka Plan:</strong> <code>react-native-maps</code> entegrasyonu ve Google Cloud API yetkilendirmeleri. Özel arayüz tasarımı (Custom Marker Rendering) ile plaka ve hız pin üzerine yazılır. Cihazın yerel arama API'ları (<code>Linking</code>) ile uygulamadan GSM aramasına köprü kurulur.",
+                icon: "🗺️"
+            }
+        };
+
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('custom-toast');
+            toast.innerText = message;
+            if (isError) {
+                toast.className = "fixed bottom-5 right-5 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 z-50 font-medium text-sm";
+            } else {
+                toast.className = "fixed bottom-5 right-5 bg-slate-950 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 z-50 font-medium border border-slate-800 text-sm";
+            }
+            
+            setTimeout(() => {
+                toast.className = "fixed bottom-5 right-5 bg-slate-950 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 font-medium border border-slate-800 text-sm";
+            }, 3500);
+        }
+
+        function navigate(tabId) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById('sec-' + tabId).classList.remove('hidden');
+            
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('nav-active'));
+            document.getElementById('nav-' + tabId).classList.add('nav-active');
+            
+            appState.currentTab = tabId;
+
+            if (tabId === 'analiz' && !appState.chartsInitialized) {
+                initCharts();
+                appState.chartsInitialized = true;
+            }
+        }
+
+        // Handle live prototype state changes
+        function setSimulatedStatus(status) {
+            appState.simulatedStatus = status;
+
+            // Reset buttons
+            ['green', 'red', 'grey'].forEach(col => {
+                const btn = document.getElementById('sim-btn-' + col);
+                btn.classList.add('opacity-60');
+                btn.querySelector('span:last-child').classList.add('hidden');
+            });
+
+            // Activate chosen button
+            const activeBtn = document.getElementById('sim-btn-' + status);
+            activeBtn.classList.remove('opacity-60');
+            activeBtn.querySelector('span:last-child').classList.remove('hidden');
+
+            // Update UI Marker on Map
+            const simDot = document.getElementById('sim-marker-dot');
+            const simMarker = document.getElementById('sim-marker');
+            const simSpeed = document.getElementById('sim-marker-speed');
+            const cardStatus = document.getElementById('sim-card-status');
+
+            if (status === 'green') {
+                simMarker.style.display = 'block';
+                simDot.className = "w-4 h-4 bg-green-500 rounded-full border-2 border-white shadow-lg mt-1 animate-bounce";
+                simSpeed.innerText = "Hız: 0 km/s";
+                cardStatus.innerText = "BOŞTA";
+                cardStatus.className = "ml-1.5 text-[10px] px-2 py-0.5 rounded-full bg-green-100 text-green-800 font-bold";
+            } else if (status === 'red') {
+                simMarker.style.display = 'block';
+                simDot.className = "w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-lg mt-1 animate-pulse";
+                simSpeed.innerText = "Hız: 65 km/s";
+                cardStatus.innerText = "DOLU";
+                cardStatus.className = "ml-1.5 text-[10px] px-2 py-0.5 rounded-full bg-red-100 text-red-800 font-bold";
+            } else if (status === 'grey') {
+                // Sürücü çalışmıyor durumunda pin haritadan tamamen silinir
+                simMarker.style.display = 'none';
+                cardStatus.innerText = "MESAI DIŞI";
+                cardStatus.className = "ml-1.5 text-[10px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 font-bold";
+            }
+        }
+
+        function simulateCall() {
+            showToast("Simülasyon: Ümit Bey aranıyor... (+90 5XX XXX XX XX)");
+        }
+
+        function simulateAssignJob() {
+            if (appState.simulatedStatus === 'grey') {
+                showToast("Hata: Sürücü mesai dışında olduğu için iş atanamaz!", true);
+                return;
+            }
+            showToast("Simülasyon: Mercedes Vito (34 NZ 8000) aracına transfer görevi başarıyla iletildi!");
+        }
+
+        function showTechDetail(stepKey) {
+            document.querySelectorAll('.arch-step').forEach(el => el.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const detailData = techDetails[stepKey];
+            const panel = document.getElementById('tech-detail-panel');
+            
+            panel.innerHTML = `
+                <div class="animate-fade-in">
+                    <div class="text-4xl mb-4">${detailData.icon}</div>
+                    <h3 class="text-xl font-bold text-white mb-4 border-b border-slate-600 pb-2">${detailData.title}</h3>
+                    <p class="text-slate-300 leading-relaxed text-sm">${detailData.content}</p>
+                </div>
+            `;
+        }
+
+        function initCharts() {
+            const ctxEffort = document.getElementById('effortChart').getContext('2d');
+            new Chart(ctxEffort, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Arayüz Kodlama', 'Arka Plan Servisleri', 'Veri Senkronizasyonu', 'Dağıtım & TestFlight', 'Saha Testleri'],
+                    datasets: [{
+                        data: [15, 20, 20, 25, 20],
+                        backgroundColor: ['#3b82f6', '#f59e0b', '#10b981', '#ef4444', '#8b5cf6'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#475569', font: { family: "'Segoe UI', sans-serif" } } }
+                    },
+                    cutout: '65%'
+                }
+            });
+
+            const ctxRisk = document.getElementById('riskChart').getContext('2d');
+            new Chart(ctxRisk, {
+                type: 'bar',
+                data: {
+                    labels: ['Market Dağıtımı / Mağaza Reddi', 'Arka Plan Kapanması', 'Harita Donması', 'GPS Kopması'],
+                    datasets: [
+                        {
+                            label: '3 Günde Teslim (Risk %)',
+                            data: [98, 95, 80, 90],
+                            backgroundColor: '#ef4444',
+                            borderRadius: 4
+                        },
+                        {
+                            label: '14 Günde Teslim (Risk %)',
+                            data: [5, 5, 2, 5],
+                            backgroundColor: '#10b981',
+                            borderRadius: 4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 100,
+                            grid: { color: '#e2e8f0' },
+                            ticks: { color: '#64748b' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { 
+                                color: '#64748b',
+                                callback: function(value) {
+                                    const label = this.getLabelForValue(value);
+                                    if (label.length > 16) {
+                                        return label.substring(0, 16) + '...';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#475569' } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
