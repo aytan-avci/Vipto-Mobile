@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr" class="h-full bg-[#070A13] text-slate-300">
+<html lang="tr" class="h-full bg-[#0E1014] text-[#A6ADBB]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B2B Sipariş Yönetimi & Onay Mekanizması - Premium Kurumsal Demo</title>
+    <title>B2B Sipariş Yönetimi & Onay Mekanizması - Kurumsal Demo</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
@@ -15,81 +15,81 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #070A13;
+            background-color: #0E1014;
         }
-        /* Kurumsal Mat Kartlar */
+        /* Kurumsal Karbon-Antrasit Kart Tasarımı */
         .business-card {
-            background-color: #101626;
-            border: 1px solid #1E293B;
-            border-radius: 0.5rem;
+            background-color: #171922;
+            border: 1px solid #262936;
+            border-radius: 0.375rem;
         }
-        /* Hassas UI Kaydırma Çubuğu */
+        /* Hassas UI Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: #070A13;
+            background: #0E1014;
         }
         ::-webkit-scrollbar-thumb {
-            background: #223049;
-            border-radius: 3px;
+            background: #2E3244;
+            border-radius: 2px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #2D3E5D;
+            background: #3E435B;
         }
     </style>
 </head>
-<body class="h-full flex flex-col justify-between selection:bg-slate-700 selection:text-white">
+<body class="h-full flex flex-col justify-between selection:bg-[#343A40] selection:text-white">
 
     <!-- ÜST NAVİGASYON VE RESPONSIVE HAMBURGER MENÜ -->
-    <header class="border-b border-[#1E293B] bg-[#0A0E1A] sticky top-0 z-40 px-4 lg:px-8 py-3">
+    <header class="border-b border-[#262936] bg-[#12141D] sticky top-0 z-40 px-4 lg:px-8 py-3">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             
             <!-- Logo ve Başlık -->
             <div class="flex items-center gap-3">
-                <div class="p-1.5 bg-[#141C30] rounded border border-[#223049]">
+                <div class="p-1.5 bg-[#171922] rounded border border-[#262936]">
                     <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
                 </div>
                 <div>
                     <h1 class="font-bold text-sm tracking-tight text-slate-100">ORDERflow</h1>
-                    <p class="text-[9px] text-slate-500 font-medium uppercase tracking-wider">Kurumsal B2B Portal</p>
+                    <p class="text-[9px] text-[#848CA1] font-semibold uppercase tracking-wider">B2B Kurumsal Portal</p>
                 </div>
             </div>
 
-            <!-- DESKTOP NAVİGASYON (Geniş Ekranlar İçin) -->
+            <!-- DESKTOP NAVİGASYON (Kurumsal Çelik Grisi) -->
             <nav class="hidden lg:flex items-center space-x-1" aria-label="Tabs">
-                <button onclick="changeTab('dashboard')" id="tabBtn-dashboard" class="px-3 py-1.5 rounded text-xs font-semibold bg-[#141C30] text-slate-100 transition-all flex items-center gap-1.5 border border-[#223049]">
+                <button onclick="changeTab('dashboard')" id="tabBtn-dashboard" class="px-3 py-1.5 rounded text-xs font-semibold bg-[#262936] text-slate-100 transition-all flex items-center gap-1.5 border border-[#3E435B]">
                     Gösterge Paneli
                 </button>
-                <button onclick="changeTab('siparisAl')" id="tabBtn-siparisAl" class="px-3 py-1.5 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1.5">
+                <button onclick="changeTab('siparisAl')" id="tabBtn-siparisAl" class="px-3 py-1.5 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 transition-all flex items-center gap-1.5">
                     Sipariş Al (Sepet)
                 </button>
-                <button onclick="changeTab('girilenSiparisler')" id="tabBtn-girilenSiparisler" class="px-3 py-1.5 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1.5">
+                <button onclick="changeTab('girilenSiparisler')" id="tabBtn-girilenSiparisler" class="px-3 py-1.5 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 transition-all flex items-center gap-1.5">
                     Girilen Siparişler
                 </button>
-                <button onclick="changeTab('surecSemasi')" id="tabBtn-surecSemasi" class="px-3 py-1.5 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1.5">
+                <button onclick="changeTab('surecSemasi')" id="tabBtn-surecSemasi" class="px-3 py-1.5 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 transition-all flex items-center gap-1.5">
                     İş Akış Şeması
                 </button>
             </nav>
 
-            <!-- DESKTOP ROL SİMÜLATÖRÜ (Geniş Ekranlar İçin) -->
-            <div class="hidden lg:flex items-center gap-2 bg-[#101626] p-1 rounded-lg border border-[#1E293B]">
-                <button onclick="switchRole('sales@firma.com')" id="roleBtnSales" class="px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 bg-[#1E293B] text-slate-200 border border-[#2D3E5D]">
+            <!-- DESKTOP ROL SİMÜLATÖRÜ -->
+            <div class="hidden lg:flex items-center gap-2 bg-[#171922] p-1 rounded border border-[#262936]">
+                <button onclick="switchRole('sales@firma.com')" id="roleBtnSales" class="px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 bg-[#262936] text-slate-200 border border-[#3E435B]">
                     <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                     sales@firma.com (Temsilci)
                 </button>
-                <button onclick="switchRole('admin@firma.com')" id="roleBtnAdmin" class="px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200">
+                <button onclick="switchRole('admin@firma.com')" id="roleBtnAdmin" class="px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 text-[#848CA1] hover:text-slate-200">
                     <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
                     admin@firma.com (Yetkili)
                 </button>
             </div>
 
-            <!-- MOBİL HAMBURGER BUTONU (Küçük Ekranlar İçin) -->
+            <!-- MOBİL HAMBURGER BUTONU -->
             <div class="flex lg:hidden items-center">
-                <button onclick="toggleMobileMenu()" class="p-2 rounded bg-[#101626] border border-[#1E293B] text-slate-400 hover:text-slate-200 focus:outline-none">
+                <button onclick="toggleMobileMenu()" class="p-2 rounded bg-[#171922] border border-[#262936] text-slate-400 hover:text-slate-200 focus:outline-none">
                     <svg id="hamburgerOpenIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -102,34 +102,32 @@
         </div>
     </header>
 
-    <!-- MOBİL AÇILIR PANEL (Collapsible Mobile Menu) -->
-    <div id="mobileMenu" class="hidden lg:hidden border-b border-[#1E293B] bg-[#0A0E1A] px-4 py-4 space-y-4 transition-all">
-        <!-- Mobil Navigasyon Linkleri -->
+    <!-- MOBİL MENU -->
+    <div id="mobileMenu" class="hidden lg:hidden border-b border-[#262936] bg-[#12141D] px-4 py-4 space-y-4 transition-all">
         <div class="space-y-1.5">
-            <span class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider px-2 mb-1">Sistem Sekmeleri</span>
-            <button onclick="changeTabMobile('dashboard')" id="mobileTabBtn-dashboard" class="w-full text-left px-3 py-2 rounded text-xs font-semibold bg-[#141C30] text-slate-200 flex items-center gap-2 border border-[#223049]">
+            <span class="block text-[10px] font-bold text-[#848CA1] uppercase tracking-wider px-2 mb-1">Menü</span>
+            <button onclick="changeTabMobile('dashboard')" id="mobileTabBtn-dashboard" class="w-full text-left px-3 py-2 rounded text-xs font-semibold bg-[#262936] text-slate-200 flex items-center gap-2 border border-[#3E435B]">
                 Gösterge Paneli
             </button>
-            <button onclick="changeTabMobile('siparisAl')" id="mobileTabBtn-siparisAl" class="w-full text-left px-3 py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 flex items-center gap-2">
+            <button onclick="changeTabMobile('siparisAl')" id="mobileTabBtn-siparisAl" class="w-full text-left px-3 py-2 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 flex items-center gap-2">
                 Sipariş Al (Sepet)
             </button>
-            <button onclick="changeTabMobile('girilenSiparisler')" id="mobileTabBtn-girilenSiparisler" class="w-full text-left px-3 py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 flex items-center gap-2">
+            <button onclick="changeTabMobile('girilenSiparisler')" id="mobileTabBtn-girilenSiparisler" class="w-full text-left px-3 py-2 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 flex items-center gap-2">
                 Girilen Siparişler
             </button>
-            <button onclick="changeTabMobile('surecSemasi')" id="mobileTabBtn-surecSemasi" class="w-full text-left px-3 py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 flex items-center gap-2">
+            <button onclick="changeTabMobile('surecSemasi')" id="mobileTabBtn-surecSemasi" class="w-full text-left px-3 py-2 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 flex items-center gap-2">
                 İş Akış Şeması
             </button>
         </div>
 
-        <!-- Mobil Rol Değiştirici -->
-        <div class="space-y-1.5 pt-3 border-t border-[#1E293B]">
-            <span class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider px-2 mb-1">Aktif Kullanıcı Simülasyonu</span>
+        <div class="space-y-1.5 pt-3 border-t border-[#262936]">
+            <span class="block text-[10px] font-bold text-[#848CA1] uppercase tracking-wider px-2 mb-1">Simülasyon Rolü</span>
             <div class="grid grid-cols-1 gap-2">
-                <button onclick="switchRoleMobile('sales@firma.com')" id="mobileRoleBtnSales" class="w-full text-center py-2 rounded text-xs font-semibold bg-[#1E293B] text-slate-200 border border-[#2D3E5D] flex items-center justify-center gap-1.5">
+                <button onclick="switchRoleMobile('sales@firma.com')" id="mobileRoleBtnSales" class="w-full text-center py-2 rounded text-xs font-semibold bg-[#262936] text-slate-200 border border-[#3E435B] flex items-center justify-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                     sales@firma.com (Temsilci)
                 </button>
-                <button onclick="switchRoleMobile('admin@firma.com')" id="mobileRoleBtnAdmin" class="w-full text-center py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 bg-[#101626] border border-[#1E293B] flex items-center justify-center gap-1.5">
+                <button onclick="switchRoleMobile('admin@firma.com')" id="mobileRoleBtnAdmin" class="w-full text-center py-2 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 bg-[#171922] border border-[#262936] flex items-center justify-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
                     admin@firma.com (Yetkili)
                 </button>
@@ -141,12 +139,12 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
 
         <!-- BİLDİRİM KUTUSU (TOAST) -->
-        <div id="toastNotification" class="hidden fixed bottom-5 right-5 z-50 max-w-sm bg-[#101626] border border-[#1E293B] rounded p-4 shadow-2xl transition-all transform translate-y-10 opacity-0">
+        <div id="toastNotification" class="hidden fixed bottom-5 right-5 z-50 max-w-sm bg-[#171922] border border-[#262936] rounded p-4 shadow-2xl transition-all transform translate-y-10 opacity-0">
             <div class="flex items-start gap-3">
-                <div id="toastIcon" class="p-1 rounded bg-[#1C253B] text-slate-300 mt-0.5"></div>
+                <div id="toastIcon" class="p-1 rounded bg-[#262936] text-slate-300 mt-0.5"></div>
                 <div class="flex-grow">
                     <h4 id="toastTitle" class="text-xs font-bold text-slate-100">Süreç Bilgisi</h4>
-                    <p id="toastMessage" class="text-[11px] text-slate-400 mt-0.5">İşlem gerçekleştirildi.</p>
+                    <p id="toastMessage" class="text-[11px] text-[#848CA1] mt-0.5">İşlem gerçekleştirildi.</p>
                 </div>
                 <button onclick="hideToast()" class="text-slate-500 hover:text-slate-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -154,14 +152,24 @@
             </div>
         </div>
 
-        <!-- ÜST DÖNEM BİLGİSİ (Tüm ekranlarda temiz ve sağa yaslı) -->
+        <!-- SÜREÇ KISITI BİLGİLENDİRME BANDI (Kritik Mantık Düzeltmesi) -->
+        <div class="mb-5 bg-[#251A12] border border-[#4E3218] rounded px-4 py-2.5 flex items-start gap-2.5 text-xs text-[#E2934D]">
+            <svg class="w-4 h-4 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+            <div>
+                <strong class="font-bold">B2B Süreç Doğrulaması:</strong> Onaylanmamış (Onay Bekleyen veya Revizyon durumundaki) siparişler sevk edilemez. Bu nedenle, sipariş onay aşamasına geçene kadar sevk (irsaliye) miktarları otomatik olarak <strong class="underline">0 adet</strong> düzeyinde kilitli kalır.
+            </div>
+        </div>
+
+        <!-- ÜST DÖNEM BİLGİSİ -->
         <div class="flex justify-end mb-4">
-            <div class="flex items-center gap-2 bg-[#101626] border border-[#1E293B] px-3 py-1.5 rounded text-xs">
-                <span class="text-slate-500">İlgili Dönem:</span>
+            <div class="flex items-center gap-2 bg-[#171922] border border-[#262936] px-3 py-1.5 rounded text-xs">
+                <span class="text-[#848CA1]">İlgili Dönem:</span>
                 <select id="periodFilter" onchange="filterPeriod()" class="bg-transparent font-semibold text-slate-200 focus:outline-none cursor-pointer">
-                    <option value="Temmuz 2026" class="bg-[#101626]">Temmuz 2026</option>
-                    <option value="Haziran 2026" class="bg-[#101626]">Haziran 2026</option>
-                    <option value="Mayıs 2026" class="bg-[#101626]">Mayıs 2026</option>
+                    <option value="Temmuz 2026" class="bg-[#171922]">Temmuz 2026</option>
+                    <option value="Haziran 2026" class="bg-[#171922]">Haziran 2026</option>
+                    <option value="Mayıs 2026" class="bg-[#171922]">Mayıs 2026</option>
                 </select>
             </div>
         </div>
@@ -174,36 +182,36 @@
                 
                 <div class="business-card p-5 flex items-center justify-between shadow-sm">
                     <div>
-                        <p class="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">Seçilen Dönem</p>
-                        <h3 id="metricPeriod" class="text-lg font-bold text-slate-100 mt-1">Temmuz 2026</h3>
-                        <p class="text-[10px] text-slate-500 mt-1 flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                        <p class="text-[10px] font-semibold tracking-wider text-[#848CA1] uppercase">Seçilen Dönem</p>
+                        <h3 id="metricPeriod" class="text-base font-bold text-slate-100 mt-1">Temmuz 2026</h3>
+                        <p class="text-[10px] text-slate-550 mt-1 flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-slate-450"></span>
                             Sistem zamanı güncel
                         </p>
                     </div>
-                    <div class="p-2.5 rounded bg-[#182135] text-slate-400 border border-[#223049]">
+                    <div class="p-2.5 rounded bg-[#262936] text-slate-300 border border-[#3E435B]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 00-2 2z"></path></svg>
                     </div>
                 </div>
 
                 <div class="business-card p-5 flex items-center justify-between shadow-sm">
                     <div>
-                        <p class="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">Toplam Satılan Ürün Adedi</p>
-                        <h3 id="metricTotalQty" class="text-xl font-bold text-slate-100 mt-1">0 Adet</h3>
-                        <p class="text-[10px] text-emerald-600 mt-1">Onaylanan tüm siparişler</p>
+                        <p class="text-[10px] font-semibold tracking-wider text-[#848CA1] uppercase">Toplam Sevk Edilen Ürün</p>
+                        <h3 id="metricTotalQty" class="text-base font-bold text-slate-100 mt-1">0 Adet</h3>
+                        <p class="text-[10px] text-[#4EAD77] mt-1">Sadece sevk irsaliyesi kesilmiş</p>
                     </div>
-                    <div class="p-2.5 rounded bg-[#122A22] text-emerald-500 border border-[#1B4D3E]">
+                    <div class="p-2.5 rounded bg-[#152D21] text-[#4EAD77] border border-[#204E35]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
                     </div>
                 </div>
 
                 <div class="business-card p-5 flex items-center justify-between shadow-sm">
                     <div>
-                        <p class="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">Toplam Satış Tutarı (TL)</p>
-                        <h3 id="metricTotalRevenue" class="text-xl font-bold text-slate-100 mt-1">₺0,00</h3>
-                        <p class="text-[10px] text-slate-500 mt-1">Markup dahil net tutar</p>
+                        <p class="text-[10px] font-semibold tracking-wider text-[#848CA1] uppercase">Toplam Satış Tutarı (TL)</p>
+                        <h3 id="metricTotalRevenue" class="text-base font-bold text-slate-100 mt-1">₺0,00</h3>
+                        <p class="text-[10px] text-slate-500 mt-1">Markup dahil onaylı net tutar</p>
                     </div>
-                    <div class="p-2.5 rounded bg-[#14233C] text-slate-300 border border-[#20375E]">
+                    <div class="p-2.5 rounded bg-[#232938] text-slate-300 border border-[#374158]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                 </div>
@@ -221,7 +229,7 @@
                                 <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
                                 Aktif Tamamlanmamış Siparişler Listesi
                             </h3>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Onay bekleyen veya sevk aşamasında olan güncel kayıtlar</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5">Onay bekleyen veya sevk süreci (irsaliye) eksik olan kayıtlar</p>
                         </div>
                         
                         <!-- Arama Kutusu -->
@@ -229,22 +237,22 @@
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-600">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             </span>
-                            <input type="text" id="dashboardSearch" onkeyup="searchIncompleteOrders()" placeholder="Müşteri kodu veya adı..." class="w-full bg-[#070A13] border border-[#1E293B] rounded pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-700">
+                            <input type="text" id="dashboardSearch" onkeyup="searchIncompleteOrders()" placeholder="Müşteri kodu veya adı..." class="w-full bg-[#0E1014] border border-[#262936] rounded pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-700">
                         </div>
                     </div>
 
                     <!-- Yatay Kaydırılabilir Responsive Tablo -->
-                    <div class="overflow-x-auto rounded border border-[#1E293B]">
+                    <div class="overflow-x-auto rounded border border-[#262936]">
                         <table class="w-full text-left text-xs border-collapse min-w-[500px]">
                             <thead>
-                                <tr class="bg-[#0A0E1A] text-slate-400 font-semibold border-b border-[#1E293B]">
+                                <tr class="bg-[#12141D] text-[#848CA1] font-semibold border-b border-[#262936]">
                                     <th class="p-3">Müşteri Kodu / Adı</th>
                                     <th class="p-3 text-right">Toplam Sipariş</th>
                                     <th class="p-3 text-right">İrsaliyelenen</th>
                                     <th class="p-3 text-center">Durum</th>
                                 </tr>
                             </thead>
-                            <tbody id="incompleteOrdersTableBody" class="divide-y divide-[#1E293B] text-slate-300">
+                            <tbody id="incompleteOrdersTableBody" class="divide-y divide-[#262936] text-slate-300">
                                 <!-- Dinamik veri basılacak -->
                             </tbody>
                         </table>
@@ -262,7 +270,7 @@
                         <canvas id="statusChart"></canvas>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2 text-[10px] mt-4 pt-4 border-t border-[#1E293B]">
+                    <div class="grid grid-cols-2 gap-2 text-[10px] mt-4 pt-4 border-t border-[#262936]">
                         <div class="flex items-center gap-1.5 text-slate-400">
                             <span class="w-2 h-2 rounded bg-amber-600 inline-block"></span>
                             <span>Onay Bekliyor</span>
@@ -272,7 +280,7 @@
                             <span>Onaylandı</span>
                         </div>
                         <div class="flex items-center gap-1.5 text-slate-400">
-                            <span class="w-2 h-2 rounded bg-blue-600 inline-block"></span>
+                            <span class="w-2 h-2 rounded bg-[#385B88] inline-block"></span>
                             <span>Revize İstenen</span>
                         </div>
                         <div class="flex items-center gap-1.5 text-slate-400">
@@ -299,7 +307,7 @@
                     <!-- Müşteri Seçimi -->
                     <div class="space-y-1.5">
                         <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Müşteri Tanımı</label>
-                        <select id="cartCustomer" onchange="updateCartCustomer()" class="w-full bg-[#070A13] border border-[#1E293B] rounded p-2.5 text-xs text-slate-300 focus:outline-none focus:border-slate-700 cursor-pointer">
+                        <select id="cartCustomer" onchange="updateCartCustomer()" class="w-full bg-[#0E1014] border border-[#262936] rounded p-2.5 text-xs text-slate-300 focus:outline-none focus:border-slate-700 cursor-pointer">
                             <option value="">-- Müşteri Seçiniz --</option>
                             <option value="320.01.01.00001">320.01.01.00001 | Gürgenç İşletme Ltd.</option>
                             <option value="320.01.01.00002">320.01.01.00002 | Arçelik Yetkili Bayi</option>
@@ -309,40 +317,40 @@
                     </div>
 
                     <!-- Ürün Listesi Katalogu -->
-                    <div class="space-y-2 pt-3 border-t border-[#1E293B]">
+                    <div class="space-y-2 pt-3 border-t border-[#262936]">
                         <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Katalog</label>
                         
                         <div class="space-y-2 max-h-[280px] overflow-y-auto pr-1">
                             <!-- Ürün 1 -->
-                            <div class="p-3 bg-[#070A13] rounded border border-[#1E293B] flex items-center justify-between gap-2 hover:border-slate-700 transition-all">
+                            <div class="p-3 bg-[#0E1014] rounded border border-[#262936] flex items-center justify-between gap-2 hover:border-slate-700 transition-all">
                                 <div>
                                     <span class="text-[9px] font-mono text-slate-500 uppercase">PRD-001</span>
                                     <h5 class="text-xs font-semibold text-slate-300">Gürgenç Panel Klasik</h5>
                                     <p class="text-[9px] text-slate-500 mt-0.5">₺125,00 / Adet</p>
                                 </div>
-                                <button onclick="addProductToCart('PRD-001', 'Gürgenç Panel Klasik', 125.00)" class="px-2.5 py-1.5 bg-[#1F2937] hover:bg-[#374151] rounded text-[11px] font-bold text-slate-200 transition-all border border-[#374151]">
+                                <button onclick="addProductToCart('PRD-001', 'Gürgenç Panel Klasik', 125.00)" class="px-2.5 py-1.5 bg-[#262936] hover:bg-[#343A40] rounded text-[11px] font-bold text-slate-200 transition-all border border-[#3E435B]">
                                     Ekle
                                 </button>
                             </div>
                             <!-- Ürün 2 -->
-                            <div class="p-3 bg-[#070A13] rounded border border-[#1E293B] flex items-center justify-between gap-2 hover:border-slate-700 transition-all">
+                            <div class="p-3 bg-[#0E1014] rounded border border-[#262936] flex items-center justify-between gap-2 hover:border-slate-700 transition-all">
                                 <div>
                                     <span class="text-[9px] font-mono text-slate-500 uppercase">PRD-002</span>
                                     <h5 class="text-xs font-semibold text-slate-300">Arçelik Ankastre Set</h5>
                                     <p class="text-[9px] text-slate-500 mt-0.5">₺170,00 / Adet</p>
                                 </div>
-                                <button onclick="addProductToCart('PRD-002', 'Arçelik Ankastre Set', 170.00)" class="px-2.5 py-1.5 bg-[#1F2937] hover:bg-[#374151] rounded text-[11px] font-bold text-slate-200 transition-all border border-[#374151]">
+                                <button onclick="addProductToCart('PRD-002', 'Arçelik Ankastre Set', 170.00)" class="px-2.5 py-1.5 bg-[#262936] hover:bg-[#343A40] rounded text-[11px] font-bold text-slate-200 transition-all border border-[#3E435B]">
                                     Ekle
                                 </button>
                             </div>
                             <!-- Ürün 3 -->
-                            <div class="p-3 bg-[#070A13] rounded border border-[#1E293B] flex items-center justify-between gap-2 hover:border-slate-700 transition-all">
+                            <div class="p-3 bg-[#0E1014] rounded border border-[#262936] flex items-center justify-between gap-2 hover:border-slate-700 transition-all">
                                 <div>
                                     <span class="text-[9px] font-mono text-slate-500 uppercase">PRD-003</span>
                                     <h5 class="text-xs font-semibold text-slate-300">Vatan Pro İşlemci</h5>
                                     <p class="text-[9px] text-slate-500 mt-0.5">₺145,00 / Adet</p>
                                 </div>
-                                <button onclick="addProductToCart('PRD-003', 'Vatan Pro İşlemci', 145.00)" class="px-2.5 py-1.5 bg-[#1F2937] hover:bg-[#374151] rounded text-[11px] font-bold text-slate-200 transition-all border border-[#374151]">
+                                <button onclick="addProductToCart('PRD-003', 'Vatan Pro İşlemci', 145.00)" class="px-2.5 py-1.5 bg-[#262936] hover:bg-[#343A40] rounded text-[11px] font-bold text-slate-200 transition-all border border-[#3E435B]">
                                     Ekle
                                 </button>
                             </div>
@@ -353,21 +361,21 @@
                 <!-- Sağ Kolon: Sepet İşlemleri -->
                 <div class="lg:col-span-2 business-card p-5 flex flex-col justify-between">
                     <div>
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#1E293B] pb-3 mb-4 gap-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#262936] pb-3 mb-4 gap-2">
                             <div>
                                 <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">Sepet & Adet Girişi</h3>
                                 <p class="text-[10px] text-slate-500">Miktarları ve kurumsal markup oranlarını düzenleyin</p>
                             </div>
-                            <span id="cartCustomerBadge" class="text-xs bg-[#070A13] text-slate-400 border border-[#1E293B] px-3 py-1 rounded font-medium">
+                            <span id="cartCustomerBadge" class="text-xs bg-[#0E1014] text-slate-400 border border-[#262936] px-3 py-1 rounded font-medium">
                                 Müşteri Seçilmedi
                             </span>
                         </div>
 
                         <!-- Sepet Tablosu (Scrollable) -->
-                        <div class="overflow-x-auto rounded border border-[#1E293B] bg-[#070A13]/40 mb-4">
+                        <div class="overflow-x-auto rounded border border-[#262936] bg-[#0E1014]/40 mb-4">
                             <table class="w-full text-left text-xs border-collapse min-w-[650px]">
                                 <thead>
-                                    <tr class="bg-[#0A0E1A] text-slate-400 font-semibold border-b border-[#1E293B]">
+                                    <tr class="bg-[#12141D] text-[#848CA1] font-semibold border-b border-[#262936]">
                                         <th class="p-3">Ürün Bilgisi</th>
                                         <th class="p-3 text-right" style="width: 120px;">Adet</th>
                                         <th class="p-3 text-right">Birim Fiyat</th>
@@ -377,7 +385,7 @@
                                         <th class="p-3 text-center" style="width: 50px;">Sil</th>
                                     </tr>
                                 </thead>
-                                <tbody id="cartTableBody" class="divide-y divide-[#1E293B]">
+                                <tbody id="cartTableBody" class="divide-y divide-[#262936]">
                                     <tr>
                                         <td colspan="7" class="p-8 text-center text-slate-600">
                                             Sepetiniz boş. Sol menüden ürün ekleyebilirsiniz.
@@ -389,7 +397,7 @@
                     </div>
 
                     <!-- Alt Bilgiler ve Aksiyonlar -->
-                    <div class="border-t border-[#1E293B] pt-4 space-y-4">
+                    <div class="border-t border-[#262936] pt-4 space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="text-xs font-semibold text-slate-500">Toplam Sipariş Tutarı:</span>
                             <span id="cartTotalSum" class="text-lg font-bold text-slate-200">₺0,00</span>
@@ -398,11 +406,11 @@
                         <div id="cartErrorMessage" class="hidden bg-rose-950/20 border border-rose-900/30 text-rose-400 p-3 rounded text-xs"></div>
 
                         <div class="flex flex-col sm:flex-row items-center gap-2">
-                            <button id="btnSubmitOrder" onclick="submitCartOrder()" class="w-full sm:w-auto flex-grow px-5 py-2.5 bg-[#1F2937] hover:bg-[#2D3748] text-slate-200 text-xs font-bold rounded shadow-sm transition-all flex items-center justify-center gap-1.5 border border-[#4A5568]">
+                            <button id="btnSubmitOrder" onclick="submitCartOrder()" class="w-full sm:w-auto flex-grow px-5 py-2.5 bg-[#262936] hover:bg-[#343A40] text-slate-200 text-xs font-bold rounded shadow-sm transition-all flex items-center justify-center gap-1.5 border border-[#3E435B]">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                                 Siparişi Onaya Gönder
                             </button>
-                            <button onclick="clearCart()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-900 hover:bg-slate-850 text-slate-500 hover:text-slate-300 text-xs font-bold rounded border border-[#1E293B] transition-all">
+                            <button onclick="clearCart()" class="w-full sm:w-auto px-4 py-2.5 bg-slate-900 hover:bg-slate-850 text-slate-500 hover:text-slate-300 text-xs font-bold rounded border border-[#262936] transition-all">
                                 Sepeti Temizle
                             </button>
                         </div>
@@ -417,7 +425,7 @@
             <div class="business-card p-5 shadow-sm">
                 
                 <!-- Arama ve Filtreleme -->
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#1E293B]">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#262936]">
                     <div>
                         <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider">Sistemdeki Siparişler</h3>
                         <p class="text-[10px] text-slate-500">Yeni ve geçmiş tüm kayıtları, detaylı durumlarıyla takip edin</p>
@@ -429,12 +437,12 @@
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-600">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                             </span>
-                            <input type="text" id="orderSearchInput" onkeyup="filterOrdersTable()" placeholder="Müşteri adı veya kodu..." class="w-full bg-[#070A13] border border-[#1E293B] rounded pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-700">
+                            <input type="text" id="orderSearchInput" onkeyup="filterOrdersTable()" placeholder="Müşteri adı veya kodu..." class="w-full bg-[#0E1014] border border-[#262936] rounded pl-9 pr-3 py-2 text-xs text-slate-200 placeholder-slate-600 focus:outline-none focus:border-slate-700">
                         </div>
 
                         <!-- Durum Filtresi -->
                         <div class="w-full sm:w-44">
-                            <select id="statusFilterDropdown" onchange="filterOrdersTable()" class="w-full bg-[#070A13] border border-[#1E293B] rounded p-2 text-xs text-slate-300 focus:outline-none focus:border-slate-700 cursor-pointer">
+                            <select id="statusFilterDropdown" onchange="filterOrdersTable()" class="w-full bg-[#0E1014] border border-[#262936] rounded p-2 text-xs text-[#A6ADBB] focus:outline-none focus:border-slate-700 cursor-pointer">
                                 <option value="">Tüm Siparişler</option>
                                 <option value="Onay Bekliyor">Onay Bekleyenler</option>
                                 <option value="Onaylandı">Onaylananlar</option>
@@ -446,10 +454,10 @@
                 </div>
 
                 <!-- Siparişler Tablosu (Scrollable) -->
-                <div class="overflow-x-auto rounded border border-[#1E293B]">
+                <div class="overflow-x-auto rounded border border-[#262936]">
                     <table class="w-full text-left text-xs border-collapse min-w-[750px]">
                         <thead>
-                            <tr class="bg-[#0A0E1A] text-slate-400 font-semibold border-b border-[#1E293B]">
+                            <tr class="bg-[#12141D] text-[#848CA1] font-semibold border-b border-[#262936]">
                                 <th class="p-3">Sipariş ID</th>
                                 <th class="p-3">Tarih</th>
                                 <th class="p-3">Müşteri Detayı</th>
@@ -459,7 +467,7 @@
                                 <th class="p-3 text-center" style="width: 140px;">Aksiyon</th>
                             </tr>
                         </thead>
-                        <tbody id="ordersTableBody" class="divide-y divide-[#1E293B] text-slate-300">
+                        <tbody id="ordersTableBody" class="divide-y divide-[#262936] text-slate-300">
                             <!-- Dinamik satırlar -->
                         </tbody>
                     </table>
@@ -479,11 +487,11 @@
                         <p class="text-[10px] text-slate-500">B2B Sipariş yönetiminin arka planda çalışan rol tabanlı mantıksal mimarisi</p>
                     </div>
 
-                    <!-- Flat Tasarım SVG -->
-                    <div class="bg-[#070A13] rounded p-4 flex items-center justify-center overflow-auto border border-[#1E293B]" style="min-height: 500px;">
+                    <!-- Flat Tasarım SVG (Yeni Karbon Gri Arayüzle Uyumlu) -->
+                    <div class="bg-[#0E1014] rounded p-4 flex items-center justify-center overflow-auto border border-[#262936]" style="min-height: 500px;">
                         <svg width="100%" height="640" viewBox="0 0 450 640" class="max-w-md w-full">
                             <!-- Bağlantı Çizgileri -->
-                            <g stroke="#1E293B" stroke-width="2" fill="none">
+                            <g stroke="#262936" stroke-width="2" fill="none">
                                 <line x1="225" y1="40" x2="225" y2="85" />
                                 <line x1="225" y1="115" x2="225" y2="155" />
                                 <line x1="225" y1="185" x2="225" y2="225" />
@@ -509,60 +517,53 @@
                                 <line x1="350" y1="530" x2="350" y2="560" />
                             </g>
 
-                            <!-- 1. Adım -->
-                            <rect x="135" y="10" width="180" height="30" rx="4" fill="#141C30" stroke="#223049" />
+                            <!-- Düğümler -->
+                            <rect x="135" y="10" width="180" height="30" rx="4" fill="#171922" stroke="#262936" />
                             <text x="225" y="29" fill="#E2E8F0" font-size="10" font-weight="bold" text-anchor="middle">Giriş: sales@firma.com</text>
 
-                            <!-- Rol Tanımı -->
-                            <rect x="175" y="55" width="100" height="18" rx="3" fill="#0A0E1A" stroke="#1E293B" />
-                            <text x="225" y="67" fill="#64748B" font-size="8" text-anchor="middle">Satış Temsilcisi</text>
+                            <rect x="175" y="55" width="100" height="18" rx="3" fill="#12141D" stroke="#262936" />
+                            <text x="225" y="67" fill="#848CA1" font-size="8" text-anchor="middle">Satış Temsilcisi</text>
 
-                            <!-- 2. Adım -->
-                            <rect x="155" y="85" width="140" height="30" rx="4" fill="#141C30" stroke="#1E293B" />
+                            <rect x="155" y="85" width="140" height="30" rx="4" fill="#171922" stroke="#262936" />
                             <text x="225" y="104" fill="#E2E8F0" font-size="10" font-weight="medium" text-anchor="middle">Sipariş Al Sekmesi</text>
 
-                            <!-- Ürün Seçim Notu -->
-                            <rect x="165" y="130" width="120" height="18" rx="3" fill="#0A0E1A" stroke="#1E293B" />
-                            <text x="225" y="142" fill="#64748B" font-size="8" text-anchor="middle">Müşteri & Ürün Seçimi</text>
+                            <rect x="165" y="130" width="120" height="18" rx="3" fill="#12141D" stroke="#262936" />
+                            <text x="225" y="142" fill="#848CA1" font-size="8" text-anchor="middle">Müşteri & Ürün Seçimi</text>
 
-                            <!-- 3. Adım -->
-                            <rect x="150" y="155" width="150" height="30" rx="4" fill="#141C30" stroke="#1E293B" />
+                            <rect x="150" y="155" width="150" height="30" rx="4" fill="#171922" stroke="#262936" />
                             <text x="225" y="174" fill="#E2E8F0" font-size="10" font-weight="medium" text-anchor="middle">Sepet & Adet Girişi</text>
 
-                            <!-- Gönderim Notu -->
-                            <rect x="155" y="198" width="140" height="18" rx="3" fill="#0A0E1A" stroke="#1E293B" />
-                            <text x="225" y="210" fill="#64748B" font-size="8" text-anchor="middle">Siparişi Onaya Gönder</text>
+                            <rect x="155" y="198" width="140" height="18" rx="3" fill="#12141D" stroke="#262936" />
+                            <text x="225" y="210" fill="#848CA1" font-size="8" text-anchor="middle">Siparişi Onaya Gönder</text>
 
-                            <!-- Kaydet Kararı -->
-                            <polygon points="140,250 185,280 140,310 95,280" fill="#13233C" stroke="#253D66" />
+                            <!-- Karar Düğümü 1 -->
+                            <polygon points="140,250 185,280 140,310 95,280" fill="#20232F" stroke="#3E435B" />
                             <text x="140" y="283" fill="#E2E8F0" font-size="9" font-weight="bold" text-anchor="middle">Sipariş Kaydet</text>
                             
-                            <!-- Güncelle Kararı -->
-                            <polygon points="310,250 355,280 310,310 265,280" fill="#13233C" stroke="#253D66" />
+                            <!-- Karar Düğümü 2 -->
+                            <polygon points="310,250 355,280 310,310 265,280" fill="#20232F" stroke="#3E435B" />
                             <text x="310" y="283" fill="#E2E8F0" font-size="9" font-weight="bold" text-anchor="middle">Sipariş Güncelle</text>
 
-                            <!-- Onay Bekleme -->
-                            <rect x="145" y="350" width="160" height="30" rx="4" fill="#1C1810" stroke="#854D0E" />
+                            <!-- Statü: Onay Bekliyor -->
+                            <rect x="145" y="350" width="160" height="30" rx="4" fill="#291F12" stroke="#523A1F" />
                             <text x="225" y="369" fill="#D97706" font-size="10" font-weight="bold" text-anchor="middle">Durum: Onay Bekliyor</text>
 
-                            <!-- Onay Yetkilisi Kararı -->
-                            <rect x="145" y="425" width="160" height="30" rx="4" fill="#141C30" stroke="#1E293B" />
+                            <!-- Karar Modalı -->
+                            <rect x="145" y="425" width="160" height="30" rx="4" fill="#171922" stroke="#262936" />
                             <text x="225" y="444" fill="#E2E8F0" font-size="10" font-weight="semibold" text-anchor="middle">Sipariş Detay Modalı</text>
 
-                            <!-- Karar Düğümü -->
-                            <polygon points="225,480 265,505 225,530 185,505" fill="#0A0E1A" stroke="#334155" />
+                            <!-- Karar Mekanizması -->
+                            <polygon points="225,480 265,505 225,530 185,505" fill="#12141D" stroke="#262936" />
                             <text x="225" y="508" fill="#E2E8F0" font-size="8" font-weight="bold" text-anchor="middle">Karar</text>
 
-                            <!-- Çıkış 1: İptal -->
-                            <rect x="45" y="560" width="110" height="25" rx="4" fill="#451A1A" stroke="#7F1D1D" stroke-width="1" />
+                            <!-- Durum Yolları -->
+                            <rect x="45" y="560" width="110" height="25" rx="4" fill="#2D1212" stroke="#4F2222" stroke-width="1" />
                             <text x="100" y="576" fill="#FCA5A5" font-size="9" font-weight="bold" text-anchor="middle">İptal Edildi</text>
 
-                            <!-- Çıkış 2: Revizyon -->
-                            <rect x="170" y="560" width="110" height="25" rx="4" fill="#452A15" stroke="#78350F" stroke-width="1" />
-                            <text x="225" y="576" fill="#FCD34D" font-size="9" font-weight="bold" text-anchor="middle">Revize İste</text>
+                            <rect x="170" y="560" width="110" height="25" rx="4" fill="#18233C" stroke="#2B3B5C" stroke-width="1" />
+                            <text x="225" y="576" fill="#A4C2F4" font-size="9" font-weight="bold" text-anchor="middle">Revize İste</text>
 
-                            <!-- Çıkış 3: Onay -->
-                            <rect x="295" y="560" width="110" height="25" rx="4" fill="#063F2E" stroke="#064E3B" stroke-width="1" />
+                            <rect x="295" y="560" width="110" height="25" rx="4" fill="#102A1E" stroke="#194D36" stroke-width="1" />
                             <text x="350" y="576" fill="#A7F3D0" font-size="9" font-weight="bold" text-anchor="middle">Onaylandı</text>
                         </svg>
                     </div>
@@ -576,22 +577,22 @@
                     </div>
 
                     <div class="space-y-3 text-xs text-slate-400">
-                        <div class="p-3 bg-[#070A13] rounded border border-[#1E293B]">
+                        <div class="p-3 bg-[#0E1014] rounded border border-[#262936]">
                             <strong class="text-slate-200 block mb-1">Backend Entegrasyon & API:</strong>
                             Microsoft Active Directory, SQL Server ve kurumsal REST API (<span class="text-amber-600 font-mono text-[10px]">xxxx:yyyy</span>) uçları hazırlandı.
                         </div>
 
-                        <div class="p-3 bg-[#070A13] rounded border border-[#1E293B]">
+                        <div class="p-3 bg-[#0E1014] rounded border border-[#262936]">
                             <strong class="text-slate-200 block mb-1">Erişim Yönetimi:</strong>
                             AD tabanlı otomatik rol atama (Temsilci vs. Onay Yetkilisi) akışı.
                         </div>
 
-                        <div class="p-3 bg-[#070A13] rounded border border-[#1E293B]">
+                        <div class="p-3 bg-[#0E1014] rounded border border-[#262936]">
                             <strong class="text-slate-200 block mb-1">Revizyon Akışı:</strong>
                             Revize istenen siparişlerin, veritabanından sepet alanına otomatik geri yüklenip güncellenmesi.
                         </div>
 
-                        <div class="p-3 bg-[#070A13] rounded border border-[#1E293B]">
+                        <div class="p-3 bg-[#0E1014] rounded border border-[#262936]">
                             <strong class="text-slate-200 block mb-1">Arayüz Standartları:</strong>
                             Düşük kontrastlı kurumsal karanlık şema, minimum göz yorgunluğu, tam akış kararlılığı.
                         </div>
@@ -605,18 +606,18 @@
 
     <!-- ==================== DETAY VE İŞLEM MODALI ==================== -->
     <div id="orderDetailModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#101626] w-full max-w-4xl rounded border border-[#1E293B] my-auto">
+        <div class="bg-[#171922] w-full max-w-4xl rounded border border-[#262936] my-auto">
             
             <!-- Modal Başlık -->
-            <div class="px-5 py-4 bg-[#0A0E1A] border-b border-[#1E293B] flex items-center justify-between">
+            <div class="px-5 py-4 bg-[#12141D] border-b border-[#262936] flex items-center justify-between">
                 <div>
                     <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
                         <span>Sipariş Detay Analizi</span>
-                        <span id="modalOrderId" class="text-[10px] font-mono bg-[#1E293B] text-slate-300 px-2 py-0.5 rounded border border-[#2D3E5D]">ORD-001</span>
+                        <span id="modalOrderId" class="text-[10px] font-mono bg-[#262936] text-slate-300 px-2 py-0.5 rounded border border-[#3E435B]">ORD-001</span>
                     </h3>
                     <p id="modalOrderDate" class="text-[10px] text-slate-500 mt-0.5">Yükleniyor...</p>
                 </div>
-                <button onclick="closeOrderDetailModal()" class="text-slate-400 hover:text-slate-200 bg-[#070A13] p-1.5 rounded border border-[#1E293B]">
+                <button onclick="closeOrderDetailModal()" class="text-slate-400 hover:text-slate-200 bg-[#0E1014] p-1.5 rounded border border-[#262936]">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -624,39 +625,49 @@
             <!-- Modal İçerik -->
             <div class="p-5 space-y-5 max-h-[70vh] overflow-y-auto">
                 
+                <!-- İŞ KURALI UYARI KUTUSU (MANTIK DÜZELTMESİ) -->
+                <div class="bg-[#251A12] border border-[#4E3218] rounded p-3 text-xs text-[#E2934D] flex items-start gap-2">
+                    <svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span>
+                        <strong class="font-bold">Doğrulama Koşulu:</strong> Bu siparişin onay durumu tamamlanmadan irsaliye sevk girişleri yapılamaz. Onay verilmesi durumunda irsaliyelendirme ve sevkiyat yetkisi aktif olacaktır.
+                    </span>
+                </div>
+
                 <!-- İPTAL KUTUSU -->
-                <div id="modalCancelReasonBox" class="hidden bg-rose-950/20 border border-rose-900/30 rounded p-3.5">
+                <div id="modalCancelReasonBox" class="hidden bg-[#2D1212] border border-[#4F2222] rounded p-3.5">
                     <h4 class="text-[10px] font-bold text-rose-400 uppercase tracking-wider mb-0.5">İptal Gerekçesi</h4>
                     <p id="modalCancelReasonText" class="text-xs text-rose-200">Açıklama</p>
                 </div>
 
                 <!-- REVİZYON KUTUSU -->
-                <div id="modalRevisionBox" class="hidden bg-amber-950/20 border border-amber-900/30 rounded p-3.5">
-                    <h4 class="text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-0.5">Revizyon Notu</h4>
-                    <p id="modalRevisionNoteText" class="text-xs text-amber-200">Not</p>
+                <div id="modalRevisionBox" class="hidden bg-[#18233C] border border-[#2B3B5C] rounded p-3.5">
+                    <h4 class="text-[10px] font-bold text-blue-400 uppercase tracking-wider mb-0.5">Revizyon Notu</h4>
+                    <p id="modalRevisionNoteText" class="text-xs text-blue-200">Not</p>
                 </div>
 
                 <!-- Müşteri & Tutar Bilgileri -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="p-3 bg-[#070A13] rounded border border-[#1E293B]">
+                    <div class="p-3 bg-[#0E1014] rounded border border-[#262936]">
                         <span class="text-[9px] font-semibold text-slate-500 uppercase tracking-wider">Müşteri Tanımı</span>
                         <h4 id="modalCustomerName" class="text-xs font-bold text-slate-200 mt-1">Yükleniyor...</h4>
-                        <p id="modalCustomerCode" class="text-[10px] text-slate-600">320.01.01.XXXXX</p>
+                        <p id="modalCustomerCode" class="text-[10px] text-slate-650">320.01.01.XXXXX</p>
                     </div>
-                    <div class="p-3 bg-[#070A13] rounded border border-[#1E293B]">
+                    <div class="p-3 bg-[#0E1014] rounded border border-[#262936]">
                         <span class="text-[9px] font-semibold text-slate-500 uppercase tracking-wider">Mali Genel Toplam</span>
                         <h4 id="modalTotalRevenue" class="text-xs font-bold text-slate-200 mt-1">₺0,00</h4>
-                        <p id="modalTotalQty" class="text-[10px] text-slate-600">0 Adet Toplam</p>
+                        <p id="modalTotalQty" class="text-[10px] text-slate-650">0 Adet Toplam</p>
                     </div>
                 </div>
 
                 <!-- Ürün Satırları (Scrollable) -->
                 <div>
                     <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Sipariş Satırları</h4>
-                    <div class="overflow-x-auto rounded border border-[#1E293B] bg-[#070A13]/40">
+                    <div class="overflow-x-auto rounded border border-[#262936] bg-[#0E1014]/40">
                         <table class="w-full text-left text-xs border-collapse min-w-[600px]">
                             <thead>
-                                <tr class="bg-[#0A0E1A] text-slate-400 font-semibold border-b border-[#1E293B]">
+                                <tr class="bg-[#12141D] text-[#848CA1] font-semibold border-b border-[#262936]">
                                     <th class="p-2.5">Ürün Bilgisi</th>
                                     <th class="p-2.5 text-right">Adet</th>
                                     <th class="p-2.5 text-right">Birim Fiyat</th>
@@ -665,7 +676,7 @@
                                     <th class="p-2.5 text-right">Tutar</th>
                                 </tr>
                             </thead>
-                            <tbody id="modalItemsTableBody" class="divide-y divide-[#1E293B] text-slate-300">
+                            <tbody id="modalItemsTableBody" class="divide-y divide-[#262936] text-slate-300">
                                 <!-- Dinamik satırlar -->
                             </tbody>
                         </table>
@@ -675,14 +686,14 @@
                 <!-- Süreç Tarihçesi Logu -->
                 <div>
                     <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Süreç Tarihçesi (Timeline Log)</h4>
-                    <div class="relative pl-5 space-y-3.5 border-l border-[#1E293B] ml-2" id="modalTimeline">
+                    <div class="relative pl-5 space-y-3.5 border-l border-[#262936] ml-2" id="modalTimeline">
                         <!-- Zaman tüneli -->
                     </div>
                 </div>
 
                 <!-- Karar Alanı (Yetkili) -->
-                <div id="modalDecisionArea" class="hidden pt-4 border-t border-[#1E293B] space-y-3">
-                    <div class="bg-[#070A13] p-4 rounded border border-[#1E293B]">
+                <div id="modalDecisionArea" class="hidden pt-4 border-t border-[#262936] space-y-3">
+                    <div class="bg-[#0E1014] p-4 rounded border border-[#262936]">
                         <div class="flex items-center justify-between gap-2 mb-3">
                             <span class="text-xs font-semibold text-amber-500 flex items-center gap-1.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
@@ -690,10 +701,10 @@
                             </span>
                         </div>
                         <div class="flex flex-wrap items-center gap-2">
-                            <button onclick="approveOrderAction()" class="px-4 py-2 bg-[#122A22] text-emerald-400 hover:bg-[#16362C] font-bold text-xs rounded border border-[#1B4D3E] transition-all flex items-center gap-1">
+                            <button onclick="approveOrderAction()" class="px-4 py-2 bg-[#102A1E] text-emerald-400 hover:bg-[#16362C] font-bold text-xs rounded border border-[#194D36] transition-all flex items-center gap-1">
                                 Onayla
                             </button>
-                            <button onclick="showRevisionInput()" class="px-4 py-2 bg-[#2D1F10] text-amber-400 hover:bg-[#3B2C1C] font-bold text-xs rounded border border-[#4F361F] transition-all flex items-center gap-1">
+                            <button onclick="showRevisionInput()" class="px-4 py-2 bg-[#18233C] text-blue-400 hover:bg-[#203158] font-bold text-xs rounded border border-[#2B3B5C] transition-all flex items-center gap-1">
                                 Revizyon İste
                             </button>
                             <button onclick="showCancelInput()" class="px-4 py-2 bg-[#2D1212] text-rose-400 hover:bg-[#3D1A1A] font-bold text-xs rounded border border-[#4F2222] transition-all flex items-center gap-1">
@@ -703,18 +714,18 @@
                     </div>
 
                     <!-- Not Giriş Kutuları -->
-                    <div id="revisionInputArea" class="hidden bg-[#070A13] p-3 rounded border border-[#1E293B] space-y-2">
+                    <div id="revisionInputArea" class="hidden bg-[#0E1014] p-3 rounded border border-[#262936] space-y-2">
                         <label class="block text-[10px] font-semibold text-amber-500 uppercase tracking-wider">Revizyon Açıklaması</label>
-                        <textarea id="revisionNoteInput" rows="2" placeholder="Temsilciye iletilecek revizyon notunu yazın..." class="w-full bg-[#101626] border border-[#1E293B] rounded p-2.5 text-xs text-slate-300 focus:outline-none focus:border-slate-700"></textarea>
+                        <textarea id="revisionNoteInput" rows="2" placeholder="Temsilciye iletilecek revizyon notunu yazın..." class="w-full bg-[#171922] border border-[#262936] rounded p-2.5 text-xs text-slate-300 focus:outline-none focus:border-slate-700"></textarea>
                         <div class="flex justify-end gap-1.5">
                             <button onclick="cancelDecisionForms()" class="px-2.5 py-1.5 bg-slate-800 text-slate-300 text-xs rounded hover:bg-slate-700">Vazgeç</button>
-                            <button onclick="submitRevisionAction()" class="px-2.5 py-1.5 bg-[#452A15] text-amber-300 text-xs font-bold rounded border border-[#78350F] hover:bg-[#5C3A1F]">Revizyon Talebini İlet</button>
+                            <button onclick="submitRevisionAction()" class="px-2.5 py-1.5 bg-[#452A15] text-[#E2934D] text-xs font-bold rounded border border-[#78350F] hover:bg-[#5C3A1F]">Revizyon Talebini İlet</button>
                         </div>
                     </div>
 
-                    <div id="cancelInputArea" class="hidden bg-[#070A13] p-3 rounded border border-[#1E293B] space-y-2">
+                    <div id="cancelInputArea" class="hidden bg-[#0E1014] p-3 rounded border border-[#262936] space-y-2">
                         <label class="block text-[10px] font-semibold text-rose-400 uppercase tracking-wider">İptal Gerekçesi</label>
-                        <textarea id="cancelReasonInput" rows="2" placeholder="Siparişin iptal edilme nedenini yazın..." class="w-full bg-[#101626] border border-[#1E293B] rounded p-2.5 text-xs text-slate-300 focus:outline-none focus:border-slate-700"></textarea>
+                        <textarea id="cancelReasonInput" rows="2" placeholder="Siparişin iptal edilme nedenini yazın..." class="w-full bg-[#171922] border border-[#262936] rounded p-2.5 text-xs text-slate-300 focus:outline-none focus:border-slate-700"></textarea>
                         <div class="flex justify-end gap-1.5">
                             <button onclick="cancelDecisionForms()" class="px-2.5 py-1.5 bg-slate-800 text-slate-300 text-xs rounded hover:bg-slate-700">Vazgeç</button>
                             <button onclick="submitCancelAction()" class="px-2.5 py-1.5 bg-[#451A1A] text-rose-300 text-xs font-bold rounded border border-[#7F1D1D] hover:bg-[#5C2323]">Siparişi İptal Et</button>
@@ -723,8 +734,8 @@
                 </div>
 
                 <!-- API Terminal Log Penceresi -->
-                <div id="apiConsoleArea" class="hidden pt-3 border-t border-[#1E293B]">
-                    <div class="bg-slate-950 rounded border border-[#1E293B] p-3 font-mono text-[10px] text-emerald-400">
+                <div id="apiConsoleArea" class="hidden pt-3 border-t border-[#262936]">
+                    <div class="bg-slate-950 rounded border border-[#262936] p-3 font-mono text-[10px] text-[#4EAD77]">
                         <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-900 text-[9px] text-slate-600">
                             <span>SİSTEM TERMİNALİ - REST API GÖNDERİMİ</span>
                             <span class="text-emerald-500 font-bold">TAMAMLANDI</span>
@@ -735,7 +746,7 @@
 
             </div>
 
-            <div class="px-5 py-3.5 bg-[#0A0E1A] border-t border-[#1E293B] flex justify-end">
+            <div class="px-5 py-3.5 bg-[#12141D] border-t border-[#262936] flex justify-end">
                 <button onclick="closeOrderDetailModal()" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded">
                     Kapat
                 </button>
@@ -744,7 +755,7 @@
     </div>
 
     <!-- SAYFA ALTI BİLGİ -->
-    <footer class="border-t border-slate-900 bg-[#04060C] px-4 py-3 text-center text-[10px] text-slate-600">
+    <footer class="border-t border-[#262936] bg-[#08090C] px-4 py-3 text-center text-[10px] text-slate-650">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
             <p>© 2026 ORDERflow. Tüm hakları saklıdır.</p>
             <p>Güvenli Altyapı: Active Directory Entegrasyonu (ADFS) | SQL Server | Secure HTTPS REST</p>
@@ -767,13 +778,13 @@
                     musteriAdi: 'Gürgenç İşletme Ltd.',
                     durum: 'Onay Bekliyor',
                     toplamAdet: 12000,
-                    irsaliyelenenAdet: 10000,
+                    irsaliyelenenAdet: 0, // MANTIK DÜZELTMESİ: Onay bekleyen siparişte irsaliye sıfırlanmıştır.
                     toplamTutar: 1500000,
                     items: [
                         { kod: 'PRD-001', ad: 'Gürgenç Panel Klasik', adet: 12000, birimFiyat: 125.00, markup: 0, netFiyat: 125.00, toplamTutar: 1500000 }
                     ],
                     logs: [
-                        { tarih: '2026-07-08 10:15', kullanıcı: 'sales@firma.com', aksiyon: 'Sipariş Onaya Gönderildi', detay: 'Yeni sepet girişi tamamlandı.' }
+                        { tarih: '2026-07-08 10:15', kullanıcı: 'sales@firma.com', aksiyon: 'Sipariş Onaya Gönderildi', detay: 'Yeni sepet girişi tamamlandı. Onay bekleniyor, sevk miktarı kilitlendi.' }
                     ],
                     revizyonNotu: '',
                     iptalNedeni: ''
@@ -785,7 +796,7 @@
                     musteriAdi: 'Arçelik Yetkili Bayi',
                     durum: 'Onaylandı',
                     toplamAdet: 500,
-                    irsaliyelenenAdet: 500,
+                    irsaliyelenenAdet: 350, // Onaylandığı için kısmi sevk (irsaliye) yapılabilir.
                     toplamTutar: 85000,
                     items: [
                         { kod: 'PRD-002', ad: 'Arçelik Ankastre Set', adet: 500, birimFiyat: 170.00, markup: 0, netFiyat: 170.00, toplamTutar: 85000 }
@@ -804,7 +815,7 @@
                     musteriAdi: 'Vatan Bilgisayar A.Ş.',
                     durum: 'Revize İste',
                     toplamAdet: 1500,
-                    irsaliyelenenAdet: 0,
+                    irsaliyelenenAdet: 0, // Revizyon aşamasında sevk miktarı 0 olmak zorundadır.
                     toplamTutar: 217500,
                     items: [
                         { kod: 'PRD-003', ad: 'Vatan Pro İşlemci', adet: 1500, birimFiyat: 145.00, markup: 0, netFiyat: 145.00, toplamTutar: 217500 }
@@ -851,15 +862,14 @@
         // Mobil Menüden Sekme Değiştirme
         function changeTabMobile(tabId) {
             changeTab(tabId);
-            toggleMobileMenu(); // Sekme seçildikten sonra mobil menüyü kapat
+            toggleMobileMenu();
 
-            // Mobil düğme stillerini güncelle
             const tabs = ['dashboard', 'siparisAl', 'girilenSiparisler', 'surecSemasi'];
             tabs.forEach(t => {
                 const btn = document.getElementById(`mobileTabBtn-${t}`);
                 btn.className = "w-full text-left px-3 py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 flex items-center gap-2";
             });
-            document.getElementById(`mobileTabBtn-${tabId}`).className = "w-full text-left px-3 py-2 rounded text-xs font-semibold bg-[#141C30] text-slate-200 flex items-center gap-2 border border-[#223049]";
+            document.getElementById(`mobileTabBtn-${tabId}`).className = "w-full text-left px-3 py-2 rounded text-xs font-semibold bg-[#262936] text-slate-200 flex items-center gap-2 border border-[#3E435B]";
         }
 
         // Mobil Menüden Rol Değiştirme
@@ -871,11 +881,11 @@
             const btnAdmin = document.getElementById('mobileRoleBtnAdmin');
 
             if (role === 'sales@firma.com') {
-                btnSales.className = "w-full text-center py-2 rounded text-xs font-semibold bg-[#1E293B] text-slate-200 border border-[#2D3E5D] flex items-center justify-center gap-1.5";
-                btnAdmin.className = "w-full text-center py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 bg-[#101626] border border-[#1E293B] flex items-center justify-center gap-1.5";
+                btnSales.className = "w-full text-center py-2 rounded text-xs font-semibold bg-[#262936] text-slate-200 border border-[#3E435B] flex items-center justify-center gap-1.5";
+                btnAdmin.className = "w-full text-center py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 bg-[#171922] border border-[#262936] flex items-center justify-center gap-1.5";
             } else {
-                btnAdmin.className = "w-full text-center py-2 rounded text-xs font-semibold bg-[#1E293B] text-slate-200 border border-[#2D3E5D] flex items-center justify-center gap-1.5";
-                btnSales.className = "w-full text-center py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 bg-[#101626] border border-[#1E293B] flex items-center justify-center gap-1.5";
+                btnAdmin.className = "w-full text-center py-2 rounded text-xs font-semibold bg-[#262936] text-slate-200 border border-[#3E435B] flex items-center justify-center gap-1.5";
+                btnSales.className = "w-full text-center py-2 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 bg-[#171922] border border-[#262936] flex items-center justify-center gap-1.5";
             }
         }
 
@@ -891,13 +901,13 @@
 
             let iconSvg = '';
             if (type === 'success') {
-                toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#101626] border-l-4 border-emerald-600 border-[#1E293B] rounded p-4 shadow-2xl transition-all transform translate-y-0 opacity-100";
+                toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#171922] border-l-4 border-emerald-600 border-[#262936] rounded p-4 shadow-2xl transition-all transform translate-y-0 opacity-100";
                 iconSvg = `<svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
             } else if (type === 'error') {
-                toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#101626] border-l-4 border-rose-600 border-[#1E293B] rounded p-4 shadow-2xl transition-all transform translate-y-0 opacity-100";
+                toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#171922] border-l-4 border-rose-600 border-[#262936] rounded p-4 shadow-2xl transition-all transform translate-y-0 opacity-100";
                 iconSvg = `<svg class="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
             } else {
-                toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#101626] border-l-4 border-blue-600 border-[#1E293B] rounded p-4 shadow-2xl transition-all transform translate-y-0 opacity-100";
+                toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#171922] border-l-4 border-blue-600 border-[#262936] rounded p-4 shadow-2xl transition-all transform translate-y-0 opacity-100";
                 iconSvg = `<svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`;
             }
 
@@ -910,7 +920,7 @@
 
         function hideToast() {
             const toast = document.getElementById('toastNotification');
-            toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#101626] border-[#1E293B] rounded p-4 shadow-2xl transition-all transform translate-y-10 opacity-0 pointer-events-none";
+            toast.className = "fixed bottom-5 right-5 z-50 max-w-sm bg-[#171922] border-[#262936] rounded p-4 shadow-2xl transition-all transform translate-y-10 opacity-0 pointer-events-none";
         }
 
         window.onload = function() {
@@ -939,11 +949,11 @@
             const btnAdmin = document.getElementById('roleBtnAdmin');
 
             if (role === 'sales@firma.com') {
-                btnSales.className = "px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 bg-[#1E293B] text-slate-200 border border-[#2D3E5D]";
+                btnSales.className = "px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 bg-[#262936] text-slate-200 border border-[#3E435B]";
                 btnAdmin.className = "px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200";
                 showToast('Rol Değiştirildi', 'Satış temsilcisi yetki alanındasınız.', 'info');
             } else {
-                btnAdmin.className = "px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 bg-[#1E293B] text-slate-200 border border-[#2D3E5D]";
+                btnAdmin.className = "px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 bg-[#262936] text-slate-200 border border-[#3E435B]";
                 btnSales.className = "px-2.5 py-1 rounded text-[11px] font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-slate-200";
                 showToast('Rol Değiştirildi', 'Yönetici onay yetki alanı aktif.', 'info');
             }
@@ -957,12 +967,12 @@
             tabs.forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
                 const btn = document.getElementById(`tabBtn-${t}`);
-                if (btn) btn.className = "px-3 py-1.5 rounded text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1.5";
+                if (btn) btn.className = "px-3 py-1.5 rounded text-xs font-semibold text-[#848CA1] hover:text-slate-200 transition-all flex items-center gap-1.5";
             });
 
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`tabBtn-${tabId}`);
-            if (activeBtn) activeBtn.className = "px-3 py-1.5 rounded text-xs font-semibold bg-[#141C30] text-slate-100 transition-all flex items-center gap-1.5 border border-[#223049]";
+            if (activeBtn) activeBtn.className = "px-3 py-1.5 rounded text-xs font-semibold bg-[#262936] text-slate-100 transition-all flex items-center gap-1.5 border border-[#3E435B]";
             
             if (tabId === 'dashboard') {
                 renderDashboard();
@@ -974,8 +984,9 @@
             let totalRevenue = 0;
 
             state.orders.forEach(o => {
+                // Sadece Onaylı siparişlerin sevk miktarları dashboard sevk metriğine eklenir
                 if (o.durum === 'Onaylandı') {
-                    totalQty += o.toplamAdet;
+                    totalQty += o.irsaliyelenenAdet;
                     totalRevenue += o.toplamTutar;
                 }
             });
@@ -991,18 +1002,18 @@
             });
 
             if (incompleteOrders.length === 0) {
-                incompleteBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-650">Aktif tamamlanmamış süreç bulunmamaktadır.</td></tr>`;
+                incompleteBody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-655">Aktif tamamlanmamış süreç bulunmamaktadır.</td></tr>`;
             } else {
                 incompleteOrders.forEach(o => {
                     let statusClass = '';
                     if (o.durum === 'Onay Bekliyor') statusClass = 'bg-[#291F12] text-amber-500 border border-[#523A1F]';
-                    else if (o.durum === 'Revize İste') statusClass = 'bg-[#15233C] text-blue-400 border border-[#253D66]';
+                    else if (o.durum === 'Revize İste') statusClass = 'bg-[#18233C] text-[#84A9D6] border border-[#2B3B5C]';
                     else statusClass = 'bg-[#102A1E] text-emerald-400 border border-[#194D36]';
 
                     const row = `
-                        <tr class="hover:bg-slate-900/20 transition-all border-b border-[#1E293B]">
+                        <tr class="hover:bg-slate-900/20 transition-all border-b border-[#262936]">
                             <td class="p-3 font-semibold text-slate-300">
-                                <span class="text-[10px] text-slate-650 block font-mono">${o.musteriKodu}</span>
+                                <span class="text-[10px] text-slate-500 block font-mono">${o.musteriKodu}</span>
                                 ${o.musteriAdi}
                             </td>
                             <td class="p-3 text-right font-bold text-slate-300">${o.toplamAdet.toLocaleString('tr-TR')} Adet</td>
@@ -1048,10 +1059,10 @@
                         backgroundColor: [
                             '#854D0E',  // Muted Amber
                             '#065F46',  // Muted Emerald
-                            '#1E40AF',  // Muted Blue
+                            '#2B3B5C',  // Muted Corporate Blue
                             '#991B1B'   // Muted Red
                         ],
-                        borderColor: '#101626',
+                        borderColor: '#171922',
                         borderWidth: 2
                     }]
                 },
@@ -1147,17 +1158,17 @@
                 totalSum += item.toplamTutar;
 
                 const row = `
-                    <tr class="hover:bg-slate-900/10 border-b border-[#1E293B]">
+                    <tr class="hover:bg-slate-900/10 border-b border-[#262936]">
                         <td class="p-3">
                             <span class="text-[9px] font-mono text-slate-600 block">${item.kod}</span>
                             <span class="font-semibold text-slate-300 text-xs">${item.ad}</span>
                         </td>
                         <td class="p-3">
-                            <input type="number" value="${item.adet}" onchange="updateCartItemQty(${index}, this.value)" class="w-full bg-[#070A13] border border-[#1E293B] rounded px-2 py-1 text-right text-xs text-slate-300 focus:outline-none focus:border-slate-700 font-bold">
+                            <input type="number" value="${item.adet}" onchange="updateCartItemQty(${index}, this.value)" class="w-full bg-[#0E1014] border border-[#262936] rounded px-2 py-1 text-right text-xs text-slate-300 focus:outline-none focus:border-slate-700 font-bold">
                         </td>
                         <td class="p-3 text-right text-slate-400">₺${item.birimFiyat.toFixed(2)}</td>
                         <td class="p-3">
-                            <input type="number" value="${item.markup}" onchange="updateCartItemMarkup(${index}, this.value)" class="w-full bg-[#070A13] border border-[#1E293B] rounded px-2 py-1 text-right text-xs text-slate-300 focus:outline-none focus:border-slate-700 font-bold">
+                            <input type="number" value="${item.markup}" onchange="updateCartItemMarkup(${index}, this.value)" class="w-full bg-[#0E1014] border border-[#262936] rounded px-2 py-1 text-right text-xs text-slate-300 focus:outline-none focus:border-slate-700 font-bold">
                         </td>
                         <td class="p-3 text-right text-slate-400">₺${item.netFiyat.toFixed(2)}</td>
                         <td class="p-3 text-right font-bold text-slate-200">₺${item.toplamTutar.toLocaleString('tr-TR', { minimumFractionDigits: 2 })}</td>
@@ -1233,11 +1244,12 @@
                     order.items = [...state.cart];
                     order.durum = 'Onay Bekliyor';
                     order.revizyonNotu = '';
+                    order.irsaliyelenenAdet = 0; // Sevk onay olmadığı için sıfırlandı
                     order.logs.push({
                         tarih: new Date().toISOString().replace('T', ' ').substring(0, 16),
                         kullanıcı: userEmail,
                         aksiyon: 'Sipariş Revize Edildi',
-                        detay: 'Temsilci revizyonu tamamlayıp tekrar gönderdi.'
+                        detay: 'Temsilci revizyonu tamamlayıp tekrar gönderdi. İrsaliye miktarı onay beklediği için 0 olarak kilitlendi.'
                     });
                     showToast('Güncellendi', `${order.id} tekrar onay sürecinde.`, 'success');
                 }
@@ -1251,7 +1263,7 @@
                     musteriAdi: state.cartCustomer.adi,
                     durum: 'Onay Bekliyor',
                     toplamAdet: totalAdet,
-                    irsaliyelenenAdet: 0,
+                    irsaliyelenenAdet: 0, // Yeni siparişte irsaliye her zaman 0 dır
                     toplamTutar: toplamTutar,
                     items: [...state.cart],
                     logs: [
@@ -1259,7 +1271,7 @@
                             tarih: new Date().toISOString().replace('T', ' ').substring(0, 16),
                             kullanıcı: userEmail,
                             aksiyon: 'Sipariş Gönderildi',
-                            detay: 'Yeni süreç başlatıldı.'
+                            detay: 'Yeni onay süreci başlatıldı. Sevk kilitli.'
                         }
                     ],
                     revizyonNotu: '',
@@ -1286,14 +1298,14 @@
                 let statusClass = '';
                 if (o.durum === 'Onay Bekliyor') statusClass = 'bg-[#291F12] text-amber-500 border border-[#523A1F]';
                 else if (o.durum === 'Onaylandı') statusClass = 'bg-[#102A1E] text-emerald-400 border border-[#194D36]';
-                else if (o.durum === 'Revize İste') statusClass = 'bg-[#15233C] text-blue-400 border border-[#253D66]';
+                else if (o.durum === 'Revize İste') statusClass = 'bg-[#18233C] text-[#84A9D6] border border-[#2B3B5C]';
                 else statusClass = 'bg-[#2D1212] text-rose-400 border border-[#4F2222]';
 
                 const isSalesRep = state.currentUser === 'sales@firma.com';
                 const showEditBtn = isSalesRep && o.durum === 'Revize İste';
 
                 const row = `
-                    <tr class="hover:bg-slate-900/20 transition-all border-b border-[#1E293B]">
+                    <tr class="hover:bg-slate-900/20 transition-all border-b border-[#262936]">
                         <td class="p-3 font-mono font-semibold text-slate-300">${o.id}</td>
                         <td class="p-3 text-slate-500 text-xs">${o.tarih}</td>
                         <td class="p-3">
@@ -1309,7 +1321,7 @@
                         </td>
                         <td class="p-3 text-center">
                             <div class="flex items-center justify-center gap-1.5">
-                                <button onclick="openOrderDetailModal('${o.id}')" class="px-2.5 py-1 bg-[#1F2937] hover:bg-[#374151] text-slate-200 border border-[#374151] rounded text-xs transition-all">
+                                <button onclick="openOrderDetailModal('${o.id}')" class="px-2.5 py-1 bg-[#262936] hover:bg-[#343A40] text-slate-200 border border-[#3E435B] rounded text-xs transition-all">
                                     Detay
                                 </button>
                                 ${showEditBtn ? `
@@ -1408,9 +1420,9 @@
             itemsTbody.innerHTML = '';
             order.items.forEach(item => {
                 const row = `
-                    <tr class="border-b border-[#1E293B]">
+                    <tr class="border-b border-[#262936]">
                         <td class="p-2.5">
-                            <span class="text-[9px] font-mono text-slate-500 block">${item.kod}</span>
+                            <span class="text-[9px] font-mono text-slate-505 block">${item.kod}</span>
                             <span class="font-bold text-slate-300">${item.ad}</span>
                         </td>
                         <td class="p-2.5 text-right font-semibold text-slate-300">${item.adet.toLocaleString('tr-TR')}</td>
@@ -1434,7 +1446,7 @@
                             <span class="text-slate-500 text-[10px]">${log.tarih}</span>
                         </div>
                         <p class="text-[10px] text-slate-500 mt-0.5">Kullanıcı: ${log.kullanıcı}</p>
-                        ${log.detay ? `<p class="text-[10px] text-slate-500 mt-1 bg-slate-950 p-2 rounded border border-[#1E293B]">${log.detay}</p>` : ''}
+                        ${log.detay ? `<p class="text-[10px] text-slate-500 mt-1 bg-slate-950 p-2 rounded border border-[#262936]">${log.detay}</p>` : ''}
                     </div>
                 `;
                 timeline.innerHTML += logItem;
@@ -1471,7 +1483,7 @@
                 tarih: new Date().toISOString().replace('T', ' ').substring(0, 16),
                 kullanıcı: state.currentUser,
                 aksiyon: 'Sipariş Onaylandı',
-                detay: 'REST API üzerinden kurumsal sunucu entegrasyonu başarılı.'
+                detay: 'Yönetim onayı alındı. Sipariş sevk (irsaliye) havuzuna aktarıldı.'
             });
 
             const consoleArea = document.getElementById('apiConsoleArea');
@@ -1479,7 +1491,7 @@
             
             const logs = document.getElementById('terminalLogs');
             logs.innerHTML = `
-                <div class="text-slate-500">> BAĞLANTI İSTEĞİ: xxxx:yyyy...</div>
+                <div class="text-slate-550">> BAĞLANTI İSTEĞİ: xxxx:yyyy...</div>
                 <div class="text-slate-400">> POST /api/v1/orders HTTP/1.1</div>
                 <div class="text-slate-300">> PAYLOAD: ${JSON.stringify({ orderId: order.id, customer: order.musteriKodu, total: order.toplamTutar })}</div>
                 <div class="text-emerald-500 font-bold">> ENTEGRASYON YANITI: HTTP 200 SUCCESS - İŞLEM TAMAMLANDI</div>
@@ -1511,6 +1523,7 @@
             if (order) {
                 order.durum = 'Revize İste';
                 order.revizyonNotu = note;
+                order.irsaliyelenenAdet = 0; // Revizyon sevk kilitli
                 order.logs.push({
                     tarih: new Date().toISOString().replace('T', ' ').substring(0, 16),
                     kullanıcı: state.currentUser,
@@ -1542,6 +1555,7 @@
             if (order) {
                 order.durum = 'İptal Edildi';
                 order.iptalNedeni = reason;
+                order.irsaliyelenenAdet = 0; // İptal sipariş sevk miktarı sıfır
                 order.logs.push({
                     tarih: new Date().toISOString().replace('T', ' ').substring(0, 16),
                     kullanıcı: state.currentUser,
